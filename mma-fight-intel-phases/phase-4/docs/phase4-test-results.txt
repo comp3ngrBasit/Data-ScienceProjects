@@ -1,0 +1,24 @@
+Phase 4 test results — 2026-11-15
+
+Full suite (with real footage, MMA_TEST_FOOTAGE_DIR set):
+67 passed, 7 warnings in 175.29s (0:02:55)
+
+Phase 4 tests:
+tests/test_patterns.py::test_wilson_hand_computed PASSED                 [  5%]
+tests/test_patterns.py::test_reliability_labels PASSED                   [ 11%]
+tests/test_patterns.py::test_entropy_js_chi_square PASSED                [ 17%]
+tests/test_patterns.py::test_prepare_orders_dedupes_and_splits PASSED    [ 23%]
+tests/test_patterns.py::test_duplicate_footage_of_same_fight_is_not_double_counted PASSED [ 29%]
+tests/test_patterns.py::test_whole_video_is_not_one_sequence PASSED      [ 35%]
+tests/test_patterns.py::test_combinations_counts PASSED                  [ 41%]
+tests/test_patterns.py::test_conditional_probability_definitions_are_separate PASSED [ 47%]
+tests/test_patterns.py::test_next_offensive_skips_defence PASSED         [ 52%]
+tests/test_patterns.py::test_second_order_context PASSED                 [ 58%]
+tests/test_patterns.py::test_markov_smoothing_hand_computed PASSED       [ 64%]
+tests/test_patterns.py::test_prefixspan_finds_gapped_patterns PASSED     [ 70%]
+tests/test_patterns.py::test_explorer_before_after PASSED                [ 76%]
+tests/test_patterns.py::test_tendencies_and_reactions PASSED             [ 82%]
+tests/test_patterns.py::test_opponent_analysis_requires_sufficient_data PASSED [ 88%]
+tests/test_patterns.py::test_compare_two_fighters PASSED                 [ 94%]
+tests/test_patterns.py::test_patterns_api_end_to_end PASSED              [100%]
+============================== 17 passed in 1.74s ==============================
