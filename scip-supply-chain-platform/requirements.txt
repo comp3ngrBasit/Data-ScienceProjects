@@ -1,0 +1,32 @@
+# Core
+pandas>=2.2
+numpy>=1.26
+scipy>=1.11
+openpyxl>=3.1
+pydantic>=2.6
+pydantic-settings>=2.2
+SQLAlchemy>=2.0
+psycopg2-binary>=2.9
+httpx>=0.27
+# ML / forecasting
+scikit-learn>=1.4
+xgboost>=2.0
+lightgbm>=4.3
+prophet>=1.1.5
+statsmodels>=0.14
+holidays>=0.45
+joblib>=1.3
+# Optimisation
+ortools>=9.10
+# LLM providers (optional at runtime; keys via environment)
+anthropic>=0.40
+openai>=1.40
+# API + UI
+fastapi>=0.110
+uvicorn[standard]>=0.29
+streamlit>=1.40
+plotly>=5.20
+# Data download (optional)
+kagglehub>=0.3
+# Tests
+pytest>=8.0

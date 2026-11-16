@@ -1,0 +1,83 @@
+{
+  "name": "SCIP – PO approval link handler",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "GET",
+        "path": "po-decision",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "2a3a0857-a109-52c0-b094-88bf0a9ed89d",
+      "name": "Approval link",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "webhookId": "edfa04ff-34cc-55b9-9682-5a0a4843e316"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ ($env.SCIP_API_URL || 'http://api:8000') + '/api/v1/procurement/purchase-orders/' + $json.query.po_id + '/' + ($json.query.decision === 'approve' ? 'approve' : 'reject') }}",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ actor: $json.query.actor || 'email-approver', comment: 'Decision via n8n e-mail link' }) }}",
+        "options": {}
+      },
+      "id": "cafcbe43-c66f-550a-b9cb-7b8e2ab01221",
+      "name": "Call SCIP API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        240,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "=PO {{ $json.po_id }} is now {{ $json.status }}. You can close this tab.",
+        "options": {}
+      },
+      "id": "e15a9f47-9760-5200-a5ca-e1a4c99f22c7",
+      "name": "Confirm to approver",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        480,
+        0
+      ]
+    }
+  ],
+  "connections": {
+    "Approval link": {
+      "main": [
+        [
+          {
+            "node": "Call SCIP API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call SCIP API": {
+      "main": [
+        [
+          {
+            "node": "Confirm to approver",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "active": false
+}

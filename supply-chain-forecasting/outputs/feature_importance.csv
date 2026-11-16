@@ -1,0 +1,15 @@
+feature,importance,label
+roll_mean_28,15.135508227011726,28-day average
+series_id,6.740604028456303,SKU / warehouse
+price,5.4605094264358405,Price
+promo,4.411828316296004,Promotion flag
+dow,2.266537356369164,Day of week
+lag_364,0.7642453369296888,Sales same day last year
+roll_mean_91,0.6919280576777596,91-day average
+roll_std_28,0.27332911264091,28-day volatility
+lag_42,0.22174534452650008,Sales 6 weeks ago
+lag_35,0.12466924620575455,Sales 5 weeks ago
+lag_28,0.05382509239721074,Sales 4 weeks ago
+dayofyear,0.03952919156837211,Day of year
+weekofyear,0.02433571067339386,Week of year
+month,-0.009038887474611101,Month

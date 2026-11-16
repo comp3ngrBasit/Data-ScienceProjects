@@ -1,0 +1,223 @@
+{
+  "name": "SCIP – Event router (webhook)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "scip-events",
+        "options": {}
+      },
+      "id": "cb09153d-1d78-53c9-b805-510f68819ab6",
+      "name": "SCIP events webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "webhookId": "671744f2-fbab-5dda-9ac1-695f68e1804c"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose"
+                },
+                "conditions": [
+                  {
+                    "id": "fa2b57c5-4c85-4bf3-95d9-b72115dfb014",
+                    "leftValue": "={{ $json.body.event }}",
+                    "rightValue": "po.approval_requested",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "approval"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose"
+                },
+                "conditions": [
+                  {
+                    "id": "81a957eb-3ea1-42c7-8427-1467028290fd",
+                    "leftValue": "={{ $json.body.event }}",
+                    "rightValue": "po.decision",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "decision"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose"
+                },
+                "conditions": [
+                  {
+                    "id": "e2881266-9ba0-408a-b88f-5196ac3c81b6",
+                    "leftValue": "={{ $json.body.event }}",
+                    "rightValue": "automation.cycle_completed",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "cycle"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "id": "e7ebc4d0-8235-5a40-b5eb-6bf7f210b08f",
+      "name": "Route by event",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3,
+      "position": [
+        240,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "scip@yourcompany.com",
+        "toEmail": "={{ $json.body.approval_level === 'director' ? 'director@yourcompany.com' : 'manager@yourcompany.com' }}",
+        "subject": "=Approval needed: {{ $json.body.po_id }} ({{ $json.body.value }})",
+        "emailFormat": "html",
+        "html": "=<p>Purchase order <b>{{ $json.body.po_id }}</b> for SKU {{ $json.body.sku }} from {{ $json.body.supplier_id }} worth <b>{{ $json.body.value }}</b> needs <b>{{ $json.body.approval_level }}</b> approval.</p><p><a href=\"{{ $env.N8N_PUBLIC_URL || 'http://localhost:5678' }}/webhook/po-decision?po_id={{ $json.body.po_id }}&decision=approve&actor=email-approver\">Approve</a> · <a href=\"{{ $env.N8N_PUBLIC_URL || 'http://localhost:5678' }}/webhook/po-decision?po_id={{ $json.body.po_id }}&decision=reject&actor=email-approver\">Reject</a></p>",
+        "options": {}
+      },
+      "id": "d4a44306-4c20-59c4-bf3b-b78c955ac302",
+      "name": "Email approver",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        520,
+        -200
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "scip@yourcompany.com",
+        "toEmail": "buyers@yourcompany.com",
+        "subject": "=PO {{ $json.body.po_id }} {{ $json.body.comment ? '' : '' }}decision by {{ $json.body.actor }}",
+        "emailFormat": "text",
+        "text": "={{ JSON.stringify($json.body, null, 2) }}",
+        "options": {}
+      },
+      "id": "98a408be-88c7-5339-9ddc-72451799b2fc",
+      "name": "Notify buyer of decision",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        520,
+        -50
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "scip@yourcompany.com",
+        "toEmail": "operations@yourcompany.com",
+        "subject": "=SCIP cycle: {{ $json.body.summary.status }} · critical alerts {{ ($json.body.critical_alerts || []).length }}",
+        "emailFormat": "text",
+        "text": "={{ JSON.stringify($json.body.summary, null, 2) }}",
+        "options": {}
+      },
+      "id": "21134c96-1201-55cf-b8b2-d3bf799b96f2",
+      "name": "Daily summary",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        520,
+        100
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "e3241d6b-9011-577e-8c35-07372a55f8fb",
+      "name": "Other events",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        520,
+        250
+      ]
+    }
+  ],
+  "connections": {
+    "SCIP events webhook": {
+      "main": [
+        [
+          {
+            "node": "Route by event",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Route by event": {
+      "main": [
+        [
+          {
+            "node": "Email approver",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Notify buyer of decision",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Daily summary",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Other events",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "active": false
+}

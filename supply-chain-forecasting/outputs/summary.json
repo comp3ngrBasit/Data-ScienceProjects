@@ -1,0 +1,41 @@
+{
+  "horizon_days": 28,
+  "service_level": 0.95,
+  "history_start": "2024-01-01",
+  "history_end": "2026-09-30",
+  "n_skus": 6,
+  "n_warehouses": 2,
+  "n_rows": 12048,
+  "metrics": {
+    "model_wape": 0.203634675345833,
+    "lastyear_wape": 0.3127037722230979,
+    "ma28_wape": 0.25306036102126994,
+    "coverage_80": 0.7042124542124543,
+    "bias": -0.01252914760477063
+  },
+  "forecast_units_28d": 33323.28275674764,
+  "status_counts": {
+    "Healthy": 6,
+    "Overstock": 4,
+    "Reorder": 2
+  },
+  "excess_value": 38274.52587438476,
+  "simulation": [
+    {
+      "policy": "AI forecast",
+      "stockout_days": 6.0,
+      "lost_units": 277.78488161887503,
+      "demand": 120539,
+      "avg_stock_value": 39791.34373585595,
+      "fill_rate": 0.9976954771350445
+    },
+    {
+      "policy": "Manual min/max",
+      "stockout_days": 0.0,
+      "lost_units": 0.0,
+      "demand": 120539,
+      "avg_stock_value": 44558.83679356356,
+      "fill_rate": 1.0
+    }
+  ]
+}

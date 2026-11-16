@@ -1,0 +1,59 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: scip
+      POSTGRES_PASSWORD: scip
+      POSTGRES_DB: scip
+    volumes: [pgdata:/var/lib/postgresql/data]
+    ports: ["5432:5432"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U scip -d scip"]
+      interval: 5s
+      retries: 20
+
+  api:
+    build: .
+    env_file: [.env]
+    environment:
+      DATABASE_URL: postgresql+psycopg2://scip:scip@db:5432/scip
+      API_BASE_URL: http://api:8000
+      N8N_WEBHOOK_URL: ${N8N_WEBHOOK_URL:-http://n8n:5678/webhook/scip-events}
+    volumes:
+      - ./data:/app/data          # raw datasets + trained models persist on the host
+      - ./reports:/app/reports
+    depends_on:
+      db: {condition: service_healthy}
+    ports: ["8000:8000"]
+    healthcheck:
+      test: ["CMD", "curl", "-fs", "http://localhost:8000/health"]
+      interval: 15s
+      retries: 40
+
+  dashboard:
+    build: .
+    command: ["streamlit", "run", "dashboard/app.py", "--server.port", "8501", "--server.address", "0.0.0.0"]
+    environment:
+      SCIP_API_URL: http://api:8000
+      API_KEY: ${API_KEY:-}
+    depends_on: [api]
+    ports: ["8501:8501"]
+
+  n8n:
+    image: n8nio/n8n:latest
+    environment:
+      N8N_HOST: localhost
+      N8N_PORT: 5678
+      GENERIC_TIMEZONE: Asia/Karachi
+      SCIP_API_URL: http://api:8000
+      N8N_PUBLIC_URL: http://localhost:5678
+      N8N_BLOCK_ENV_ACCESS_IN_NODE: "false"
+    volumes:
+      - n8ndata:/home/node/.n8n
+      - ./n8n/workflows:/workflows:ro
+    ports: ["5678:5678"]
+    depends_on: [api]
+
+volumes:
+  pgdata:
+  n8ndata:

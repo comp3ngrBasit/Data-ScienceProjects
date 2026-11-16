@@ -1,0 +1,193 @@
+{
+  "name": "SCIP – Daily automation cycle",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 7 * * *"
+            }
+          ]
+        }
+      },
+      "id": "d129a84c-7c7a-5456-9910-3f404afad16a",
+      "name": "Every day 07:00",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.SCIP_API_URL || 'http://api:8000'  }}/api/v1/automation/run",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "trigger",
+              "value": "n8n-schedule"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 600000
+        }
+      },
+      "id": "5fedf8f0-b0db-5cdf-8681-c0e2d10c3b51",
+      "name": "Run automation cycle",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        240,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "id": "ce79bee1-8690-42c6-8653-fdc03df6cc41",
+              "leftValue": "={{ $json.alerts && $json.alerts.Critical ? $json.alerts.Critical : 0 }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "415ae032-0f94-55c0-ade3-0658f652f0f0",
+      "name": "Critical alerts?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        480,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "url": "={{ $env.SCIP_API_URL || 'http://api:8000'  }}/api/v1/alerts",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "severity",
+              "value": "Critical"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "bb6427f1-dedb-5dee-86db-3d975a94415a",
+      "name": "Get critical alerts",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        720,
+        -100
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "scip@yourcompany.com",
+        "toEmail": "operations@yourcompany.com",
+        "subject": "=SCIP: {{ $('Run automation cycle').item.json.alerts.Critical }} critical supply chain alerts",
+        "emailFormat": "html",
+        "html": "=<h3>SCIP automation cycle</h3><p>Status: {{ $('Run automation cycle').item.json.status }} · procurement: {{ JSON.stringify($('Run automation cycle').item.json.procurement) }}</p><p>Open the Control Tower for details.</p>",
+        "options": {}
+      },
+      "id": "76694d83-4665-5afa-864f-ed07bf86056f",
+      "name": "Email operations team",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        960,
+        -100
+      ],
+      "executeOnce": true
+    },
+    {
+      "parameters": {},
+      "id": "fbd49405-d23a-5692-834e-d611ab21ac08",
+      "name": "No critical alerts",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        720,
+        100
+      ]
+    }
+  ],
+  "connections": {
+    "Every day 07:00": {
+      "main": [
+        [
+          {
+            "node": "Run automation cycle",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Run automation cycle": {
+      "main": [
+        [
+          {
+            "node": "Critical alerts?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Critical alerts?": {
+      "main": [
+        [
+          {
+            "node": "Get critical alerts",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No critical alerts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get critical alerts": {
+      "main": [
+        [
+          {
+            "node": "Email operations team",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "active": false
+}
