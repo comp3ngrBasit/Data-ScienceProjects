@@ -329,9 +329,20 @@ class ActionJobManager:
                     if f1 is not None and (best is None or f1 > best[1]):
                         best = (r["version"], f1)
                 db.flush()
+                validation = None
                 if best and cfg.get("activate_best", True):
-                    db.execute(update(ActionModelVersion).values(is_active=False))
-                    db.execute(update(ActionModelVersion).where(ActionModelVersion.version == best[0]).values(is_active=True))
+                    from app.db.platform_models import ModelDeployment
+                    from app.platform.validation import validate_action_model
+
+                    current = db.scalar(select(ActionModelVersion).where(ActionModelVersion.is_active.is_(True)))
+                    new = db.get(ActionModelVersion, best[0])
+                    validation = validate_action_model(new.metrics, current.metrics if current else None)
+                    new.training_info = {**(new.training_info or {}), "validation": validation}
+                    if validation["passed"]:
+                        db.execute(update(ActionModelVersion).values(is_active=False))
+                        db.execute(update(ActionModelVersion).where(ActionModelVersion.version == best[0]).values(is_active=True))
+                        db.add(ModelDeployment(kind="action", model_id=best[0], previous_model_id=current.version if current else None,
+                                               reason="training", validation=validation))
                 j = db.get(ActionTrainingJob, job_id)
                 warn = list(ds.warnings)
                 if out["dropped"]:
@@ -341,7 +352,11 @@ class ActionJobManager:
                     warn.append(f"Only {n_real} annotated examples were used. Metrics on so little data have very wide "
                                 "uncertainty and do not indicate real-world accuracy.")
                 j.results = {"comparison": comparison, "best": best[0] if best else None, "classes": out["classes"],
-                             "dropped": out["dropped"]}
+                             "dropped": out["dropped"], "validation": validation,
+                             "activated": bool(validation and validation["passed"])}
+                if validation and not validation["passed"]:
+                    warn.append("The best new model did not pass the deployment checks and was NOT activated; the previous model "
+                                "stays active. Failed: " + "; ".join(c["detail"] for c in validation["checks"] if not c["passed"]))
                 j.warnings = warn or None
                 j.status, j.progress, j.current_stage, j.finished_at = JobStatus.completed, 1.0, None, _now()
         except Exception as exc:

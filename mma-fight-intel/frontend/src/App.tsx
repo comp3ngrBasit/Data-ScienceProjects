@@ -10,6 +10,11 @@ import TrackingPage from "./pages/TrackingPage";
 import ActionsPage from "./pages/ActionsPage";
 import ActionModelsPage from "./pages/ActionModelsPage";
 import PatternsPage from "./pages/PatternsPage";
+import PredictionsPage from "./pages/PredictionsPage";
+import FighterIntelligencePage from "./pages/FighterIntelligencePage";
+import VideoIntelligencePage from "./pages/VideoIntelligencePage";
+import ModelEvaluationPage from "./pages/ModelEvaluationPage";
+import ModelManagementPage from "./pages/ModelManagementPage";
 import UploadPage from "./pages/UploadPage";
 import VideoDetailPage from "./pages/VideoDetailPage";
 import VideoLibraryPage from "./pages/VideoLibraryPage";
@@ -23,6 +28,11 @@ export default function App() {
             <Route path="/" element={<OverviewPage />} />
             <Route path="/videos" element={<VideoLibraryPage />} />
             <Route path="/videos/:id" element={<VideoDetailPage />} />
+            <Route path="/videos/:id/analysis" element={<VideoIntelligencePage />} />
+            <Route path="/intelligence" element={<FighterIntelligencePage />} />
+            <Route path="/intelligence/:id" element={<FighterIntelligencePage />} />
+            <Route path="/evaluation" element={<ModelEvaluationPage />} />
+            <Route path="/models" element={<ModelManagementPage />} />
             <Route path="/upload" element={<UploadPage />} />
             <Route path="/fighters" element={<FightersPage />} />
             <Route path="/fighters/:id" element={<FightersPage />} />
@@ -33,6 +43,7 @@ export default function App() {
             <Route path="/actions/:id" element={<ActionsPage />} />
             <Route path="/patterns" element={<PatternsPage />} />
             <Route path="/patterns/:fighter" element={<PatternsPage />} />
+            <Route path="/predictions" element={<PredictionsPage />} />
             <Route path="/jobs" element={<JobsPage />} />
             <Route path="/settings" element={<SettingsPage />} />
             <Route path="*" element={<Navigate to="/" replace />} />

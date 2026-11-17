@@ -51,7 +51,7 @@ def get_engine() -> Engine:
 
 
 def create_all() -> None:
-    from app.db import action_models, models, pattern_models, vision_models  # noqa: F401  (register models)
+    from app.db import action_models, models, pattern_models, platform_models, prediction_models, vision_models  # noqa: F401  (register models)
 
     Base.metadata.create_all(get_engine())
 

@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter Variable", "Segoe UI", system-ui, sans-serif;
+  --font-display: "Barlow Condensed", "Arial Narrow", "Segoe UI", sans-serif;
+
+  --color-ink-950: #09090b;
+  --color-ink-900: #0d0f13;
+  --color-ink-850: #111722;
+  --color-ink-800: #161d2a;
+  --color-ink-750: #1c2433;
+  --color-ink-700: #263044;
+  --color-ink-600: #344057;
+  --color-ink-500: #4b4b56;
+  --color-ink-400: #75757f;
+  --color-ink-300: #a3a3ad;
+  --color-ink-200: #d6d6dc;
+  --color-ink-100: #f1f1f4;
+
+  --color-blood-300: #ff8a93;
+  --color-blood-400: #f5414f;
+  --color-blood-500: #e11d2e;
+  --color-blood-600: #c01222;
+  --color-blood-700: #8f0d19;
+  --color-blood-900: #2a070b;
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+  body {
+    @apply bg-ink-900 text-ink-100 font-sans antialiased;
+    font-feature-settings: "cv11", "ss01";
+  }
+  ::selection {
+    background: var(--color-blood-600);
+    color: white;
+  }
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-ink-600) transparent;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-blood-500);
+    outline-offset: 2px;
+  }
+  input[type="number"]::-webkit-inner-spin-button {
+    opacity: 0.4;
+  }
+}
+
+@utility panel {
+  @apply rounded-lg border border-ink-700/80 bg-ink-850;
+}
+@utility panel-header {
+  @apply flex items-center justify-between gap-3 border-b border-ink-700/80 px-5 py-3.5;
+}
+@utility label-caps {
+  @apply font-display text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-400;
+}
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-md px-3.5 py-2 text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-50 whitespace-nowrap;
+}
+@utility btn-primary {
+  @apply btn bg-blood-500 text-white hover:bg-blood-600 active:bg-blood-700;
+}
+@utility btn-secondary {
+  @apply btn border border-ink-600 bg-ink-800 text-ink-100 hover:border-ink-500 hover:bg-ink-750;
+}
+@utility btn-ghost {
+  @apply btn text-ink-300 hover:bg-ink-800 hover:text-ink-100;
+}
+@utility btn-danger {
+  @apply btn border border-blood-700/60 bg-blood-900/40 text-blood-300 hover:bg-blood-700/40 hover:text-white;
+}
+@utility input {
+  @apply w-full rounded-md border border-ink-600 bg-ink-900 px-3 py-2 text-sm text-ink-100 placeholder:text-ink-500 transition-colors focus:border-blood-500 focus:outline-none;
+}
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}

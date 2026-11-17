@@ -1,0 +1,23 @@
+Phase 5 test results — 2026-11-16
+
+Full suite (with real footage): 84 passed in 179 s
+
+Phase 5 tests:
+tests/test_predictions.py::test_examples_use_only_past_information PASSED [  5%]
+tests/test_predictions.py::test_fighter_stats_exclude_own_fight PASSED   [ 11%]
+tests/test_predictions.py::test_rare_classes_grouped PASSED              [ 17%]
+tests/test_predictions.py::test_metrics_hand_computed PASSED             [ 23%]
+tests/test_predictions.py::test_temperature_scaling_fixes_overconfidence PASSED [ 29%]
+tests/test_predictions.py::test_paired_bootstrap_by_fight PASSED         [ 35%]
+tests/test_predictions.py::test_markov_hand_computed PASSED              [ 41%]
+tests/test_predictions.py::test_xgboost_uses_context_markov_cannot PASSED [ 47%]
+tests/test_predictions.py::test_sequence_models_learn_order[gru] PASSED  [ 52%]
+tests/test_predictions.py::test_sequence_models_learn_order[lstm] PASSED [ 58%]
+tests/test_predictions.py::test_sequence_models_learn_order[transformer] PASSED [ 64%]
+tests/test_predictions.py::test_pipeline_splits_by_fight_and_skips_deep_models_without_data PASSED [ 70%]
+tests/test_predictions.py::test_insufficient_data_is_reported PASSED     [ 76%]
+tests/test_predictions.py::test_live_session_replay PASSED               [ 82%]
+tests/test_predictions.py::test_predictions_api_end_to_end PASSED        [ 88%]
+tests/test_predictions.py::test_import_external_sequences PASSED         [ 94%]
+tests/test_predictions.py::test_import_boxingvi_irregular_sheet PASSED   [100%]
+======================== 17 passed, 1 warning in 12.64s ========================

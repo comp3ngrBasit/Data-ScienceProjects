@@ -18,6 +18,10 @@ from app.actions import api as actions_api
 from app.actions.job_manager import ActionJobManager
 from app.patterns import api as patterns_api
 from app.patterns.service import PatternJobManager
+from app.platform import api as platform_api
+from app.platform.pipeline import PipelineManager
+from app.predictions import api as predictions_api
+from app.predictions.service import PredictionJobManager
 from app.vision import api as vision_api
 from app.vision.job_manager import VisionJobManager
 from app.core.config import BACKEND_DIR, get_settings
@@ -65,13 +69,22 @@ async def lifespan(app: FastAPI):
     app.state.action_manager = action_manager
     pattern_manager = PatternJobManager()
     app.state.pattern_manager = pattern_manager
+    prediction_manager = PredictionJobManager()
+    app.state.prediction_manager = prediction_manager
+    pipeline_manager = PipelineManager({"processing": job_manager, "vision": vision_manager, "actions": action_manager,
+                                        "patterns": pattern_manager, "prediction": prediction_manager})
+    app.state.pipeline_manager = pipeline_manager
     job_manager.start()
     vision_manager.start()
     action_manager.start()
     pattern_manager.start()
+    prediction_manager.start()
+    pipeline_manager.start()
     try:
         yield
     finally:
+        pipeline_manager.stop()
+        prediction_manager.stop()
         pattern_manager.stop()
         action_manager.stop()
         vision_manager.stop()
@@ -90,7 +103,8 @@ def create_app() -> FastAPI:
             "pose landmarks, movement analysis and annotated videos under /api/vision. Phase 3 adds action "
             "annotation, model training/evaluation and action recognition under /api/actions. Phase 4 adds fighter "
             "pattern intelligence (combinations, conditional probabilities, Markov models, tendencies, opponent "
-            "analysis, comparison) under /api/patterns."
+            "analysis, comparison) under /api/patterns. Phase 5 adds next-move prediction (Markov, XGBoost, GRU/LSTM, "
+            "Transformer; calibrated, evaluated on unseen fights) under /api/predictions."
         ),
         lifespan=lifespan,
     )
@@ -128,6 +142,9 @@ def create_app() -> FastAPI:
     app.include_router(vision_api.router)
     app.include_router(actions_api.router)
     app.include_router(patterns_api.router)
+    app.include_router(predictions_api.router)
+    for r in (platform_api.dashboard, platform_api.fighters, platform_api.models, platform_api.videos, platform_api.pipeline):
+        app.include_router(r)
 
     # Serve the built frontend (npm run build) from the same server, if present.
     if FRONTEND_DIST.exists() and (FRONTEND_DIST / "index.html").exists():

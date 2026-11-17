@@ -227,7 +227,9 @@ def extract(db: Session, settings: PatternSettings, use_cache: bool = True) -> E
                                                        vjob.id if vjob else None)
             stats["excluded_unattributed"] += unattributed
             ex.cache_misses += 1
-            if cache is None:
+            if not use_cache:
+                pass  # alternative-source extraction (evaluation): never overwrite the regular cache
+            elif cache is None:
                 db.add(PatternVideoCache(video_id=video.id, signature=sig, source=use, observations=obs_dicts))
             else:
                 cache.signature, cache.source, cache.observations = sig, use, obs_dicts

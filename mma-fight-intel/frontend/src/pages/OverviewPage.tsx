@@ -8,6 +8,8 @@ import { useData } from "../hooks/useData";
 import VisionOverviewSection from "../components/vision/VisionOverviewSection";
 import ActionOverviewSection from "../components/actions/ActionOverviewSection";
 import PatternOverviewSection from "../components/patterns/PatternOverviewSection";
+import PredictionOverviewSection from "../components/predictions/PredictionOverviewSection";
+import FightDashboard from "../components/platform/FightDashboard";
 import { formatBytes, formatDuration, formatLongDuration, formatResolution, timeAgo } from "../lib/format";
 
 const STATUS_ORDER: VideoStatus[] = ["completed", "processing", "queued", "uploaded", "failed"];
@@ -58,8 +60,8 @@ export default function OverviewPage() {
 
   const header = (
     <PageHeader
-      title="Overview"
-      subtitle="Fight footage library and processing status"
+      title="Fight Intelligence Overview"
+      subtitle="All phases at a glance — every number is computed from the analysed footage in this installation"
       actions={
         <Link to="/upload" className="btn-primary px-5 py-2.5 text-[15px] shadow-lg shadow-blood-900/50">
           <Upload className="size-4" /> Upload Fight Footage
@@ -78,6 +80,8 @@ export default function OverviewPage() {
   return (
     <>
       {header}
+      <FightDashboard />
+      <h2 className="mb-3 mt-8 font-display text-2xl font-bold uppercase tracking-wide text-white">Footage library</h2>
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
         <StatCard label="Total videos" value={o.total_videos} icon={<Film className="size-4" />} hint={`${formatLongDuration(o.total_duration_seconds)} of footage`} accent />
         <StatCard label="Fighters" value={o.total_fighters} icon={<Users className="size-4" />} hint={<Link className="hover:text-ink-200" to="/fighters">Manage profiles →</Link>} />
@@ -224,6 +228,7 @@ export default function OverviewPage() {
       <VisionOverviewSection />
       <ActionOverviewSection />
       <PatternOverviewSection />
+      <PredictionOverviewSection />
     </>
   );
 }

@@ -115,9 +115,12 @@ function VideoCard({ v, actions }: { v: VideoSummary; actions: ReturnType<typeof
         </div>
       </Link>
       <div className="flex flex-1 flex-col px-3.5 py-3">
-        <Link to={`/videos/${v.id}`} className="truncate text-sm font-medium text-ink-100 hover:text-white" title={v.title}>
-          {v.title}
-        </Link>
+        <div className="flex items-center justify-between gap-2">
+          <Link to={`/videos/${v.id}`} className="truncate text-sm font-medium text-ink-100 hover:text-white" title={v.title}>
+            {v.title}
+          </Link>
+          {v.status === "completed" && <Link to={`/videos/${v.id}/analysis`} className="shrink-0 text-[11px] text-blood-300 hover:text-blood-200">Analysis →</Link>}
+        </div>
         <div className="mt-1 flex flex-wrap gap-x-2 text-xs text-ink-400 tabular">
           {v.width ? (
             <>

@@ -339,7 +339,10 @@ export default function VideoDetailPage() {
 
   return (
     <>
-      <Link to="/videos" className="btn-ghost mb-3 -ml-3"><ArrowLeft className="size-4" />Library</Link>
+      <div className="mb-3 flex items-center justify-between">
+        <Link to="/videos" className="btn-ghost -ml-3"><ArrowLeft className="size-4" />Library</Link>
+        {v.status === "completed" && <Link to={`/videos/${v.id}/analysis`} className="btn-primary">Open full analysis →</Link>}
+      </div>
       <div className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
         <div className="min-w-0">
           <div className="flex items-center gap-3">

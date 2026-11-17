@@ -63,6 +63,39 @@ def current_job(db: Session, video_id: str) -> VisionJob | None:
     )
 
 
+def carry_over_assignments(db: Session, old_job_id: str, new_job_id: str, min_overlap: float = 0.6) -> int:
+    """Copy fighter assignments / roles from the previous analysis to matching tracks of the new one.
+
+    A new track matches an old assigned track when their time spans overlap by >= ``min_overlap`` of the shorter
+    span (same track id preferred). Unmatched assignments are dropped, never guessed; the count is reported.
+    """
+    from app.db.vision_models import TrackingSession
+
+    old = [t for t in db.scalars(select(TrackingSession).where(TrackingSession.job_id == old_job_id)).all()
+           if t.assigned_fighter_id or t.role != "unreviewed"]
+    if not old:
+        return 0
+    new = db.scalars(select(TrackingSession).where(TrackingSession.job_id == new_job_id)).all()
+    used, n = set(), 0
+    for o in old:
+        best = None
+        for t in new:
+            if t.id in used:
+                continue
+            inter = min(o.last_timestamp, t.last_timestamp) - max(o.first_timestamp, t.first_timestamp)
+            shorter = max(1e-6, min(o.last_timestamp - o.first_timestamp, t.last_timestamp - t.first_timestamp))
+            ov = inter / shorter
+            score = ov + (0.5 if t.track_id == o.track_id else 0.0)
+            if ov >= min_overlap and (best is None or score > best[0]):
+                best = (score, t)
+        if best:
+            t = best[1]
+            used.add(t.id)
+            t.assigned_fighter_id, t.role, t.reviewed = o.assigned_fighter_id, o.role, o.reviewed
+            n += 1
+    return n
+
+
 class VisionJobManager:
     def __init__(self, storage: Storage):
         self.storage = storage
@@ -252,6 +285,9 @@ class VisionJobManager:
             # Supersede earlier analyses of this video: drop their rows and files, keep their job records.
             older = [j for j in db.scalars(select(VisionJob).where(
                 VisionJob.video_id == video_id, VisionJob.id != job_id, VisionJob.status == JobStatus.completed)).all()]
+            if older:  # keep the user's fighter assignments when a video is re-analysed (Phase 6 integration)
+                carried = carry_over_assignments(db, max(older, key=lambda j: j.finished_at or j.created_at).id, job_id)
+                job.stats = {**(job.stats or {}), "assignments_carried_over": carried}
             delete_job_results(db, [j.id for j in older])
             for j in older:
                 j.stats = {**(j.stats or {}), "superseded_by": job_id}

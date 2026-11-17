@@ -1,20 +1,26 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { Activity, Film, LayoutDashboard, Menu, Network, ScanEye, Settings, Swords, Upload, Users, X } from "lucide-react";
+import { Activity, Boxes, Film, Gauge, LayoutDashboard, Menu, Network, ScanEye, Sparkles, Settings, Swords, Upload, UserRound, Users, X } from "lucide-react";
 import { api } from "../api/client";
 import { useUploads } from "../context/UploadContext";
 import { cn } from "../lib/format";
 
 const NAV = [
-  { to: "/", label: "Overview", icon: LayoutDashboard, end: true },
+  { to: "/", label: "Overview Dashboard", icon: LayoutDashboard, end: true },
   { to: "/videos", label: "Video Library", icon: Film },
-  { to: "/upload", label: "Upload Videos", icon: Upload },
-  { to: "/fighters", label: "Fighters", icon: Users },
-  { to: "/tracking", label: "Fighter Tracking", icon: ScanEye },
-  { to: "/actions", label: "Action Recognition", icon: Swords },
-  { to: "/patterns", label: "Pattern Intelligence", icon: Network },
-  { to: "/jobs", label: "Processing Jobs", icon: Activity },
+  { to: "/tracking", label: "Computer Vision Analysis", icon: ScanEye },
+  { to: "/actions", label: "MMA Action Recognition", icon: Swords },
+  { to: "/patterns", label: "Fighting Pattern Analysis", icon: Network },
+  { to: "/predictions", label: "Next-Move Predictions", icon: Sparkles },
+  { to: "/intelligence", label: "Fighter Intelligence", icon: UserRound },
+  { to: "/evaluation", label: "Model Evaluation", icon: Gauge },
+  { to: "/models", label: "Model Management", icon: Boxes },
   { to: "/settings", label: "Settings", icon: Settings },
+];
+const SECONDARY = [
+  { to: "/upload", label: "Upload videos", icon: Upload },
+  { to: "/fighters", label: "Fighter profiles", icon: Users },
+  { to: "/jobs", label: "Processing jobs", icon: Activity },
 ];
 
 function Logo() {
@@ -27,7 +33,7 @@ function Logo() {
       </svg>
       <div className="leading-tight">
         <div className="font-display text-lg font-bold uppercase tracking-wider text-white">Fight Intel</div>
-        <div className="text-[10px] font-medium uppercase tracking-[0.2em] text-ink-400">Phase 4 · Patterns</div>
+        <div className="text-[10px] font-medium uppercase tracking-[0.2em] text-ink-400">AI Fight Analytics</div>
       </div>
     </div>
   );
@@ -107,6 +113,14 @@ export default function Layout({ children }: { children: ReactNode }) {
           )}
         </NavLink>
       ))}
+      <div className="mt-4 border-t border-ink-700/60 pt-3">
+        {SECONDARY.map(({ to, label, icon: Icon }) => (
+          <NavLink key={to} to={to} className={({ isActive }) => cn("flex items-center gap-3 rounded-md px-3 py-1.5 text-xs", isActive ? "text-white" : "text-ink-400 hover:text-white")}>
+            <Icon className="size-3.5" /><span className="flex-1">{label}</span>
+            {to === "/upload" && activeCount > 0 && <span className="rounded-full bg-blood-500 px-1.5 text-[10px] font-semibold text-white tabular">{activeCount}</span>}
+          </NavLink>
+        ))}
+      </div>
     </nav>
   );
 

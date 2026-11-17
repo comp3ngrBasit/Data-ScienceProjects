@@ -23,7 +23,7 @@ class Settings(BaseSettings):
     )
 
     app_name: str = "MMA Fight Intelligence API"
-    app_version: str = "1.0.0-phase4"
+    app_version: str = "1.0.0"
 
     # Storage
     data_dir: Path = BACKEND_DIR / "data"
@@ -51,6 +51,7 @@ class Settings(BaseSettings):
     ffprobe_path: str | None = None
 
     log_level: str = "INFO"
+    log_format: str = "text"  # "text" or "json" (structured: one JSON object per line, extra fields included)
 
     # Phase 2: where pretrained model weights are cached (default: <data_dir>/models)
     models_dir: Path | None = None

@@ -1,0 +1,11 @@
+Phase 6 test results — 2026-11-16
+
+Full suite (with real footage): 91 passed in 218 s
+
+tests/test_platform.py::test_dashboard_matches_database PASSED           [ 16%]
+tests/test_platform.py::test_fighter_intelligence_and_predictions PASSED [ 33%]
+tests/test_platform.py::test_model_evaluation_management_and_rollback PASSED [ 50%]
+tests/test_platform.py::test_failed_model_inference_is_reported PASSED   [ 66%]
+tests/test_platform.py::test_interrupted_pipeline_is_marked_failed PASSED [ 83%]
+tests/test_platform.py::test_reanalysis_keeps_fighter_assignments PASSED [100%]
+tests/test_platform.py::test_real_footage_unified_pipeline PASSED (in the full run)

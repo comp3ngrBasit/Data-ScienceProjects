@@ -95,7 +95,19 @@ def test_real_footage_annotate_train_evaluate_detect(client):
     job = st["training_jobs"][0]
     assert job["status"] == "completed", job
     assert set(job["results"]["comparison"]) == {"random_forest", "xgboost", "svm", "lstm", "tcn"}
-    assert st["active_model"] is not None and job["warnings"]  # small-data warning is always shown
+    assert job["warnings"]  # small-data warning is always shown
+    # Phase 6 deployment gate: with 12 real strikes the best model has < 20 held-out samples -> it must NOT go live
+    val = job["results"]["validation"]
+    assert val is not None and not job["results"]["activated"] and st["active_model"] is None
+    assert any(c["check"] == "evaluation_size" and not c["passed"] for c in val["checks"])
+    r = client.post("/api/models/activate", json={"kind": "action", "model_id": job["results"]["best"]})
+    assert r.status_code == 409  # refused without force
+    r = client.post("/api/models/activate", json={"kind": "action", "model_id": job["results"]["best"], "force": True})
+    assert r.status_code == 200 and r.json()["validation"]["passed"] is False
+    st = client.get("/api/actions/models/status").json()
+    assert st["active_model"]["version"] == job["results"]["best"]
+    deps = client.get("/api/models/deployments", params={"kind": "action"}).json()
+    assert deps[0]["forced"] is True
 
     ev = client.get("/api/actions/models/evaluation").json()
     m = ev["metrics"]
