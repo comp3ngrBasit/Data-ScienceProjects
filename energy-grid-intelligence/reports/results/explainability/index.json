@@ -1,0 +1,7 @@
+{
+  "available": [
+    "household_hourly_h24",
+    "grid_hourly_h24",
+    "household_daily_h30"
+  ]
+}

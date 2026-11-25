@@ -1,0 +1,20 @@
+start,end,duration_min,issue,evidence,severity
+2007-04-28 00:21:00,2007-04-30 14:23:00,3723.0,missing meter readings,3723 consecutive minutes without data,high
+2007-07-15 16:49:00,2007-07-15 18:11:00,83.0,missing meter readings,83 consecutive minutes without data,medium
+2008-12-10 10:48:00,2008-12-10 11:57:00,70.0,missing meter readings,70 consecutive minutes without data,medium
+2009-06-13 00:30:00,2009-06-15 07:34:00,3305.0,missing meter readings,3305 consecutive minutes without data,high
+2009-08-13 05:00:00,2009-08-13 19:50:00,891.0,missing meter readings,891 consecutive minutes without data,medium
+2010-01-12 14:53:00,2010-01-14 19:01:00,3129.0,missing meter readings,3129 consecutive minutes without data,high
+2010-03-20 03:52:00,2010-03-21 13:38:00,2027.0,missing meter readings,2027 consecutive minutes without data,high
+2010-08-17 21:02:00,2010-08-22 21:27:00,7226.0,missing meter readings,7226 consecutive minutes without data,high
+2010-09-25 03:56:00,2010-09-28 19:12:00,5237.0,missing meter readings,5237 consecutive minutes without data,high
+2009-01-07 00:00:00,2009-01-07 23:59:00,3.0,voltage outside EN 50160 band (207-253 V),"3 minutes; min 237.2 V, max 253.2 V",medium
+2009-01-11 00:00:00,2009-01-11 23:59:00,23.0,voltage outside EN 50160 band (207-253 V),"23 minutes; min 235.9 V, max 253.9 V",medium
+2009-12-15 00:00:00,2009-12-15 23:59:00,2.0,voltage outside EN 50160 band (207-253 V),"2 minutes; min 238.1 V, max 253.4 V",medium
+2009-12-17 00:00:00,2009-12-17 23:59:00,6.0,voltage outside EN 50160 band (207-253 V),"6 minutes; min 238.7 V, max 253.8 V",medium
+2009-12-20 00:00:00,2009-12-20 23:59:00,9.0,voltage outside EN 50160 band (207-253 V),"9 minutes; min 240.1 V, max 254.1 V",medium
+2009-12-21 00:00:00,2009-12-21 23:59:00,3.0,voltage outside EN 50160 band (207-253 V),"3 minutes; min 236.8 V, max 253.3 V",medium
+2009-12-23 00:00:00,2009-12-23 23:59:00,5.0,voltage outside EN 50160 band (207-253 V),"5 minutes; min 240.9 V, max 253.4 V",medium
+2010-11-01 00:00:00,2010-11-01 23:59:00,2.0,voltage outside EN 50160 band (207-253 V),"2 minutes; min 239.7 V, max 253.1 V",medium
+2010-11-02 00:00:00,2010-11-02 23:59:00,4.0,voltage outside EN 50160 band (207-253 V),"4 minutes; min 235.4 V, max 253.5 V",medium
+,,,sub-meter sum exceeds whole-house energy,33 minutes where sub-meter sum exceeds total by > 1 Wh,low

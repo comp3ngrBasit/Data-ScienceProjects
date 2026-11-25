@@ -1,0 +1,204 @@
+{
+  "household_daily": {
+    "series": "household_daily",
+    "stl_period": 7,
+    "trend_strength": 0.655962062128969,
+    "seasonal_strength": 0.299750538412192,
+    "stationarity": {
+      "level": {
+        "series": "household_daily",
+        "adf_stat": -3.6480178114360604,
+        "adf_p": 0.004906669427471051,
+        "adf_lags": 22,
+        "adf_crit_5": -2.8635818545830376,
+        "kpss_stat": 0.21468996247896788,
+        "kpss_p": 0.1,
+        "kpss_p_note": "KPSS p-values are bounded to [0.01, 0.10] by lookup table",
+        "verdict": "stationary"
+      },
+      "diff_1": {
+        "series": "household_daily (1st diff)",
+        "adf_stat": -11.06141707140776,
+        "adf_p": 4.7989018411112066e-20,
+        "adf_lags": 21,
+        "adf_crit_5": -2.8635818545830376,
+        "kpss_stat": 0.09479801743851146,
+        "kpss_p": 0.1,
+        "kpss_p_note": "KPSS p-values are bounded to [0.01, 0.10] by lookup table",
+        "verdict": "stationary"
+      },
+      "seasonal_diff_7": {
+        "series": "household_daily (seasonal diff 7)",
+        "adf_stat": -8.217759934123254,
+        "adf_p": 6.55373068509243e-13,
+        "adf_lags": 24,
+        "adf_crit_5": -2.8635949199569324,
+        "kpss_stat": 0.04604564975493813,
+        "kpss_p": 0.1,
+        "kpss_p_note": "KPSS p-values are bounded to [0.01, 0.10] by lookup table",
+        "verdict": "stationary"
+      }
+    },
+    "trend": {
+      "slope_per_step": -0.002730672391385754,
+      "slope_p": 1.564292501693165e-05,
+      "r2": 0.012895271362120831,
+      "kendall_tau": -0.05078951432321828,
+      "kendall_p": 0.0038834075001863196
+    },
+    "significant_acf_lags": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "n_change_points": 1
+  },
+  "grid_daily": {
+    "series": "grid_daily",
+    "stl_period": 7,
+    "trend_strength": 0.6689437173216641,
+    "seasonal_strength": 0.8041499759642982,
+    "stationarity": {
+      "level": {
+        "series": "grid_daily",
+        "adf_stat": -4.584192685229881,
+        "adf_p": 0.00013811828429718473,
+        "adf_lags": 26,
+        "adf_crit_5": -2.86293524928508,
+        "kpss_stat": 0.5401246837938056,
+        "kpss_p": 0.03262957572211585,
+        "kpss_p_note": "KPSS p-values are bounded to [0.01, 0.10] by lookup table",
+        "verdict": "conflicting: ADF rejects a unit root but KPSS rejects level stationarity (deterministic trend or structural change likely)"
+      },
+      "diff_1": {
+        "series": "grid_daily (1st diff)",
+        "adf_stat": -14.207873201258327,
+        "adf_p": 1.742074316836856e-26,
+        "adf_lags": 26,
+        "adf_crit_5": -2.8629359231480236,
+        "kpss_stat": 0.03484698405561019,
+        "kpss_p": 0.1,
+        "kpss_p_note": "KPSS p-values are bounded to [0.01, 0.10] by lookup table",
+        "verdict": "stationary"
+      },
+      "seasonal_diff_7": {
+        "series": "grid_daily (seasonal diff 7)",
+        "adf_stat": -11.08447108939224,
+        "adf_p": 4.2306719039365006e-20,
+        "adf_lags": 26,
+        "adf_crit_5": -2.862939980034572,
+        "kpss_stat": 0.01582048808799572,
+        "kpss_p": 0.1,
+        "kpss_p_note": "KPSS p-values are bounded to [0.01, 0.10] by lookup table",
+        "verdict": "stationary"
+      }
+    },
+    "trend": {
+      "slope_per_step": -10.60681124093549,
+      "slope_p": 0.06184865106662274,
+      "r2": 0.00166112411803558,
+      "kendall_tau": -0.02772886934518395,
+      "kendall_p": 0.05685079526062233
+    },
+    "significant_acf_lags": [
+      1,
+      2,
+      5,
+      6,
+      7,
+      8,
+      10,
+      11,
+      13,
+      14
+    ],
+    "n_change_points": 1
+  },
+  "household_hourly": {
+    "series": "household_hourly",
+    "stl_period": 24,
+    "trend_strength": 0.2681845266662517,
+    "seasonal_strength": 0.42313860565490624,
+    "stationarity": {
+      "level": {
+        "series": "household_hourly",
+        "adf_stat": -4.9276983310198945,
+        "adf_p": 3.079393382549901e-05,
+        "adf_lags": 24,
+        "adf_crit_5": -2.8625528854376623,
+        "kpss_stat": 6.7323579557547655,
+        "kpss_p": 0.01,
+        "kpss_p_note": "KPSS p-values are bounded to [0.01, 0.10] by lookup table",
+        "verdict": "conflicting: ADF rejects a unit root but KPSS rejects level stationarity (deterministic trend or structural change likely)"
+      },
+      "diff_1": {
+        "series": "household_hourly (1st diff)",
+        "adf_stat": -21.867094200454364,
+        "adf_p": 0.0,
+        "adf_lags": 23,
+        "adf_crit_5": -2.8625528854376623,
+        "kpss_stat": 0.021534376558700205,
+        "kpss_p": 0.1,
+        "kpss_p_note": "KPSS p-values are bounded to [0.01, 0.10] by lookup table",
+        "verdict": "stationary"
+      },
+      "seasonal_diff_24": {
+        "series": "household_hourly (seasonal diff 24)",
+        "adf_stat": -13.823581946366874,
+        "adf_p": 7.823622161662879e-26,
+        "adf_lags": 25,
+        "adf_crit_5": -2.8625618378489444,
+        "kpss_stat": 0.0138760057535044,
+        "kpss_p": 0.1,
+        "kpss_p_note": "KPSS p-values are bounded to [0.01, 0.10] by lookup table",
+        "verdict": "stationary"
+      }
+    },
+    "trend": {
+      "slope_per_step": 0.0003096336014837254,
+      "slope_p": 3.9489376433144017e-81,
+      "r2": 0.11879936139157811,
+      "kendall_tau": 0.2816235046861986,
+      "kendall_p": 1.2133805466394746e-113
+    },
+    "significant_acf_lags": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      9,
+      10,
+      11,
+      12,
+      13
+    ]
+  },
+  "household_weekly": {
+    "trend_on_deseasonalised": {
+      "slope_per_step": -0.04091808726567585,
+      "slope_p": 0.16511390620862088,
+      "r2": 0.009469669271951359,
+      "kendall_tau": -0.3364897178383548,
+      "kendall_p": 7.750763407864207e-13
+    },
+    "trend_change_total_pct": -7.8539183264650925
+  },
+  "grid_weekly": {
+    "trend_on_deseasonalised": {
+      "slope_per_step": -136.9170813281856,
+      "slope_p": 0.4483997611287187,
+      "r2": 0.0019363782731423639,
+      "kendall_tau": 0.016453053803506094,
+      "kendall_p": 0.6713721061823644
+    },
+    "trend_change_total_pct": -3.048253377115573
+  }
+}

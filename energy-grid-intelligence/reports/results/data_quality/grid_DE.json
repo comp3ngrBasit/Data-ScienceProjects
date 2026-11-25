@@ -1,0 +1,84 @@
+{
+  "quality_report": {
+    "dataset": "grid_DE",
+    "n_rows": 50401,
+    "start": "2014-12-31 23:00:00+00:00",
+    "end": "2020-09-30 23:00:00+00:00",
+    "expected_rows": 50401,
+    "duplicate_timestamps": 0,
+    "missing_by_column": {
+      "load_mw": 1,
+      "tso_forecast_mw": 25,
+      "solar_mw": 104,
+      "wind_onshore_mw": 73,
+      "wind_offshore_mw": 75,
+      "solar_capacity_mw": 6601,
+      "wind_capacity_mw": 6601
+    },
+    "out_of_range_by_column": {
+      "load_mw": 0,
+      "tso_forecast_mw": 0,
+      "solar_mw": 0,
+      "wind_onshore_mw": 0,
+      "wind_offshore_mw": 0,
+      "solar_capacity_mw": 0,
+      "wind_capacity_mw": 0
+    },
+    "gaps": {
+      "n_gaps": 1,
+      "longest": 1,
+      "unit": "hours",
+      "length_distribution": {
+        "1": 1,
+        "2-5": 0,
+        "6-60": 0,
+        "61-1440": 0,
+        ">1440": 0
+      }
+    },
+    "checks": [
+      {
+        "check": "hourly index complete",
+        "passed": true,
+        "detail": "50401 vs 50401"
+      },
+      {
+        "check": "no duplicate timestamps",
+        "passed": true,
+        "detail": "0 duplicates"
+      },
+      {
+        "check": "no negative generation/load",
+        "passed": true,
+        "detail": "{'load_mw': 0, 'tso_forecast_mw': 0, 'solar_mw': 0, 'wind_onshore_mw': 0, 'wind_offshore_mw': 0, 'solar_capacity_mw': 0, 'wind_capacity_mw': 0}"
+      },
+      {
+        "check": "load missing share < 2 %",
+        "passed": true,
+        "detail": "0.002%"
+      }
+    ]
+  },
+  "imputed_hours_by_column": {
+    "load_mw": 0,
+    "tso_forecast_mw": 24,
+    "solar_mw": 103,
+    "wind_onshore_mw": 72,
+    "wind_offshore_mw": 74
+  },
+  "timezone": "Europe/Berlin",
+  "rows": 50400,
+  "period_utc": [
+    "2015-01-01 00:00:00+00:00",
+    "2020-09-30 23:00:00+00:00"
+  ],
+  "columns_used": {
+    "load_mw": "DE_load_actual_entsoe_transparency",
+    "tso_forecast_mw": "DE_load_forecast_entsoe_transparency",
+    "solar_mw": "DE_solar_generation_actual",
+    "wind_onshore_mw": "DE_wind_onshore_generation_actual",
+    "wind_offshore_mw": "DE_wind_offshore_generation_actual",
+    "solar_capacity_mw": "DE_solar_capacity",
+    "wind_capacity_mw": "DE_wind_capacity"
+  }
+}

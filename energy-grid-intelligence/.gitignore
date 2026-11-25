@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+.venv/
+.env
+.pytest_cache/
+.ruff_cache/
+logs/
+mlruns/
+mlflow.db
+# raw downloads are large and re-fetched with checksum verification
+data/raw/*
+!data/raw/.gitkeep
+data/external/*.parquet
+*.part
+models/**/*.joblib
+models/**/*.pt

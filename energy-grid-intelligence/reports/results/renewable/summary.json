@@ -1,0 +1,124 @@
+{
+  "country": "DE",
+  "kpis": {
+    "period": [
+      "2015-01-01 01:00:00",
+      "2020-10-01 01:00:00"
+    ],
+    "total_load_twh": 2796.862069,
+    "total_vre_twh": 811.8735365,
+    "total_solar_twh": 229.9516945,
+    "total_wind_twh": 581.921842,
+    "vre_penetration_pct": 29.02801484201472,
+    "solar_share_of_vre_pct": 28.323585406087442,
+    "wind_share_of_vre_pct": 71.67641459391255,
+    "solar_share_of_load_pct": 8.221774575469778,
+    "wind_share_of_load_pct": 20.806240266544943,
+    "demand_to_vre_ratio": 3.4449479423326417,
+    "hourly_vre_share_cv": 0.6287187233694971,
+    "vre_hourly_cv": 0.6463913783747954,
+    "max_hourly_vre_share_pct": 98.71287325680865,
+    "max_hourly_vre_share_time": "2020-07-04 14:00:00",
+    "hours_vre_exceeds_load": 0,
+    "hours_vre_share_above_50pct": 6958,
+    "definitions": "* VRE (variable renewable energy) = wind onshore + wind offshore + solar PV actual generation (MW).\n    OPSD time series do not contain hydro, biomass or conventional generation, so \"renewable\" here\n    means VRE only and the complement is *residual load* (load - VRE), i.e. what dispatchable plants,\n    other renewables, storage and net imports must cover. It is NOT \"non-renewable generation\".\n  * VRE penetration (%) = sum(VRE energy) / sum(load energy) over the same hours.\n  * Solar (wind) share of VRE (%) = solar (wind) energy / VRE energy.\n  * Demand-to-VRE ratio = load energy / VRE energy.\n  * Capacity factor = generation / installed capacity (OPSD capacity series).",
+    "n_low_vre_periods_24h": 21,
+    "longest_low_vre_period_h": 130,
+    "n_high_vre_hours_60pct": 3381,
+    "low_vre_definition": "VRE < 10 % of load for >= 24 consecutive hours",
+    "high_vre_definition": "VRE >= 60 % of load in an hour"
+  },
+  "ramps_mw_per_h": {
+    "solar_mw": {
+      "p1": -5422.03,
+      "p99": 5732.010000000002,
+      "max_up": 8386.0,
+      "max_down": -8067.0,
+      "std": 2039.1914992283605
+    },
+    "wind_mw": {
+      "p1": -2507.01,
+      "p99": 2620.0,
+      "max_up": 15952.0,
+      "max_down": -5412.0,
+      "std": 924.4021332239572
+    },
+    "vre_mw": {
+      "p1": -5921.02,
+      "p99": 5565.010000000002,
+      "max_up": 15952.0,
+      "max_down": -10050.0,
+      "std": 2195.809749307094
+    },
+    "load_mw": {
+      "p1": -4505.01,
+      "p99": 7937.080000000016,
+      "max_up": 10957.0,
+      "max_down": -11675.0,
+      "std": 2575.889370288593
+    }
+  },
+  "correlation_daily_load_vs_generation": {
+    "solar_gwh": {
+      "pearson_r": -0.34829622755528,
+      "pearson_p": 5.660607656684353e-61,
+      "spearman_rho": -0.38353927340004906,
+      "spearman_p": 1.3557643253680372e-74
+    },
+    "wind_gwh": {
+      "pearson_r": 0.1899140112284138,
+      "pearson_p": 1.6367286617497135e-18,
+      "spearman_rho": 0.18986385213864423,
+      "spearman_p": 1.6714595194872805e-18
+    },
+    "vre_gwh": {
+      "pearson_r": 0.07491971479079015,
+      "pearson_p": 0.0005885058793679781,
+      "spearman_rho": 0.04620359308037382,
+      "spearman_p": 0.03420139106379167
+    }
+  },
+  "residual_load_regression": {
+    "model": "residual_load_gwh ~ wind_gwh + solar_gwh + is_weekend (OLS, Newey-West SE, 7 lags)",
+    "r2": 0.8419513317613005,
+    "coefficients": {
+      "const": {
+        "coef": 1465.0597735355643,
+        "se": 11.947712398968052,
+        "p": 0.0,
+        "ci95": [
+          1441.6426875359443,
+          1488.4768595351843
+        ]
+      },
+      "wind_gwh": {
+        "coef": -0.9294168311815638,
+        "se": 0.01705468998827843,
+        "p": 0.0,
+        "ci95": [
+          -0.9628434093260854,
+          -0.8959902530370423
+        ]
+      },
+      "solar_gwh": {
+        "coef": -1.7319458301781345,
+        "se": 0.06593650811620748,
+        "p": 4.586435867406505e-152,
+        "ci95": [
+          -1.8611790113522342,
+          -1.6027126490040349
+        ]
+      },
+      "is_weekend": {
+        "coef": -256.6503647992864,
+        "se": 3.228179870403087,
+        "p": 0.0,
+        "ci95": [
+          -262.97748108089365,
+          -250.3232485176792
+        ]
+      }
+    }
+  },
+  "n_countries_compared": 17
+}

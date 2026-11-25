@@ -1,0 +1,10 @@
+{
+  "key": "household_hourly_h24",
+  "model": "LSTM",
+  "issued_at_data_end": "2010-11-25 23:00:00",
+  "unit": "kWh",
+  "total_next_period": 31.671955108642578,
+  "peak_next_period": 2.4995503425598145,
+  "peak_time": "2010-11-26 20:00:00",
+  "interval_level": 0.9
+}

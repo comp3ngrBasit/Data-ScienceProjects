@@ -1,0 +1,53 @@
+# docker compose up -d db api dashboard           # serve existing results
+# docker compose run --rm pipeline                # (re)build data, models and reports
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-egi}
+      POSTGRES_USER: ${POSTGRES_USER:-egi}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change-me}
+    volumes: [pgdata:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-egi}"]
+      interval: 10s
+      retries: 5
+
+  pipeline:
+    build: .
+    command: ["python", "-m", "app.pipeline", "run"]
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-egi}:${POSTGRES_PASSWORD:-change-me}@db:5432/${POSTGRES_DB:-egi}
+    volumes: &vols
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./reports:/app/reports
+      - ./logs:/app/logs
+    depends_on:
+      db: {condition: service_healthy}
+    profiles: ["jobs"]
+
+  api:
+    build: .
+    command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-egi}:${POSTGRES_PASSWORD:-change-me}@db:5432/${POSTGRES_DB:-egi}
+    volumes: *vols
+    ports: ["8000:8000"]
+    depends_on:
+      db: {condition: service_healthy}
+
+  dashboard:
+    build: .
+    command: ["streamlit", "run", "app/dashboard/streamlit_app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+    env_file: .env
+    environment:
+      EGI_API_URL: http://api:8000
+    volumes: *vols
+    ports: ["8501:8501"]
+    depends_on: [api]
+
+volumes:
+  pgdata:

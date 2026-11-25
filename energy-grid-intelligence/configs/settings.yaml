@@ -1,0 +1,12 @@
+# Reference copy of the analytical settings (source of truth: app/config.py).
+random_seed: 42
+grid_country: DE
+forecast:
+  split: {test_fraction: 0.15, val_fraction: 0.10}
+  walk_forward_origins: {h24: 12, h168: 6, d30: 6}
+  interval_level: 0.90
+  models: [SeasonalNaive, LinearRegression, RandomForest, XGBoost, SARIMA, SARIMAX, Prophet, LSTM]
+bayes: {draws: 1000, tune: 1000, chains: 2, target_accept: 0.9}
+weather: {hdd_base_c: 15.5, cdd_base_c: 22.0}
+anomaly: {contamination: 0.005, consensus_min_detectors: 2, min_abs_deviation_kwh: 0.5}
+peak: {household_window: data-driven 4h, grid_window: "08-20 Mon-Fri (EEX)"}

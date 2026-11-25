@@ -1,0 +1,45 @@
+{
+  "disclaimer": "Anomalies are statistical deviations from expected consumption. They do not by themselves prove electricity theft, equipment failure or meter malfunction; each requires on-site or metadata verification.",
+  "baseline": "median of same hour-of-week over previous 4 weeks (causal)",
+  "methods": [
+    "IQR",
+    "Isolation Forest",
+    "Local Outlier Factor",
+    "One-Class SVM",
+    "Seasonal residual (STL)",
+    "Z-score"
+  ],
+  "hours_scored": 33452,
+  "flags_by_method": {
+    "IQR": 850,
+    "Isolation Forest": 168,
+    "One-Class SVM": 168,
+    "Local Outlier Factor": 168,
+    "Z-score": 121,
+    "Seasonal residual (STL)": 110
+  },
+  "consensus_rule": ">= 2 detectors agree",
+  "practical_significance_floor_kwh": 0.5,
+  "n_consensus_anomalies": 171,
+  "consensus_by_type": {
+    "consumption spike": 108,
+    "sudden consumption drop": 39,
+    "unusual overnight usage": 24
+  },
+  "consensus_by_severity": {
+    "low": 64,
+    "medium": 56,
+    "high": 35,
+    "critical": 16
+  },
+  "consensus_by_driver": {
+    "unmetered remainder": 72,
+    "laundry": 63,
+    "kitchen": 21,
+    "water heater / AC": 15
+  },
+  "severity_rule": "max(|rolling z|, |robust z|) of the deviation from the causal baseline: >=8 critical, >=6 high, >=4 medium, else low",
+  "n_daily_anomalies": 15,
+  "n_data_quality_findings": 19,
+  "n_repeated_patterns": 14
+}

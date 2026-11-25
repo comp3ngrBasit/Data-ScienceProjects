@@ -1,0 +1,33 @@
+# Tested with Python 3.13 on the versions below (lower bounds = tested versions).
+# PyTorch: on CPU-only machines/containers install the smaller CPU wheel first:
+#   pip install torch --index-url https://download.pytorch.org/whl/cpu
+numpy>=2.5
+pandas>=3.0
+polars>=2.2
+pyarrow>=26.0
+scipy>=1.18
+statsmodels>=0.15
+scikit-learn>=1.9
+xgboost>=3.4
+prophet>=1.5
+pymc>=6.4
+arviz>=1.3
+shap>=0.54
+torch>=2.15
+ruptures>=1.1.10
+holidays>=0.109
+plotly>=7.2
+matplotlib>=3.11
+reportlab>=5.0
+fastapi>=0.165
+uvicorn[standard]>=0.54
+pydantic>=2.13
+streamlit>=1.67
+requests>=2.34
+httpx>=0.28
+mlflow>=3.18
+joblib>=1.6
+SQLAlchemy>=2.1
+psycopg[binary]>=3.2
+pytest>=9.1
+ruff>=0.8

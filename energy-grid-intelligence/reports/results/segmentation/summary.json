@@ -1,0 +1,83 @@
+{
+  "household": {
+    "unit_of_analysis": "household-day (24-hour load profile)",
+    "n_days": 1411,
+    "chosen_k": 6,
+    "gmm_k_by_bic": 8,
+    "dbscan_eps": 2.175493204744356,
+    "stability": {
+      "mean_ari": 0.8364152771322735,
+      "std_ari": 0.103070959406546,
+      "n_bootstrap": 30
+    },
+    "features": [
+      "daily_kwh",
+      "max_kwh",
+      "min_kwh",
+      "variability_cv",
+      "night_share",
+      "daytime_share",
+      "peak_hour_kwh",
+      "load_factor"
+    ],
+    "pca_explained_variance": [
+      0.3924349787214107,
+      0.2765379247895251,
+      0.15146247963284465
+    ],
+    "cluster_names": {
+      "0": "Night-time intensive / Low-consumption",
+      "1": "High-variability",
+      "2": "Daytime intensive",
+      "3": "Stable / Low-consumption / Night-time intensive",
+      "4": "Weekend-intensive / High base-load / High-consumption",
+      "5": "Weekend-intensive / Evening-peak heavy / High-consumption"
+    }
+  },
+  "grid": {
+    "unit_of_analysis": "national grid (OPSD country), 2016-2019",
+    "n_countries": 30,
+    "chosen_k": 2,
+    "features": [
+      "cv",
+      "load_factor",
+      "night_share",
+      "weekend_ratio",
+      "winter_summer_ratio",
+      "daily_amplitude"
+    ],
+    "dendrogram_order": [
+      "SK",
+      "CH",
+      "FI",
+      "BG",
+      "RS",
+      "NO",
+      "FR",
+      "SE",
+      "HU",
+      "BE",
+      "RO",
+      "LU",
+      "AT",
+      "DE",
+      "CZ",
+      "ES",
+      "NL",
+      "PL",
+      "PT",
+      "SI",
+      "ME",
+      "GR",
+      "HR",
+      "IE",
+      "LT",
+      "IT",
+      "GB_GBN",
+      "LV",
+      "DK",
+      "EE"
+    ],
+    "kmeans_vs_hierarchical_ari": 1.0
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "key": "grid_hourly_h24",
+  "n_explained": 2000,
+  "top_features": [
+    {
+      "feature": "lag_168",
+      "mean_abs_shap": 4115.02490234375,
+      "share_pct": 32.32740783691406,
+      "group": "recent-history lags"
+    },
+    {
+      "feature": "lag_336",
+      "mean_abs_shap": 1760.3055419921875,
+      "share_pct": 13.828863143920898,
+      "group": "recent-history lags"
+    },
+    {
+      "feature": "lag_24",
+      "mean_abs_shap": 1620.9044189453125,
+      "share_pct": 12.733735084533691,
+      "group": "recent-history lags"
+    },
+    {
+      "feature": "is_offday",
+      "mean_abs_shap": 1211.95263671875,
+      "share_pct": 9.52103328704834,
+      "group": "calendar flags"
+    },
+    {
+      "feature": "dayofweek",
+      "mean_abs_shap": 452.7170104980469,
+      "share_pct": 3.5565197467803955,
+      "group": "day of week"
+    },
+    {
+      "feature": "lag_25",
+      "mean_abs_shap": 292.2843322753906,
+      "share_pct": 2.2961695194244385,
+      "group": "recent-history lags"
+    },
+    {
+      "feature": "is_holiday",
+      "mean_abs_shap": 291.9653625488281,
+      "share_pct": 2.293663740158081,
+      "group": "calendar flags"
+    },
+    {
+      "feature": "lag_144",
+      "mean_abs_shap": 288.5042724609375,
+      "share_pct": 2.2664737701416016,
+      "group": "recent-history lags"
+    },
+    {
+      "feature": "lag_120",
+      "mean_abs_shap": 282.2369689941406,
+      "share_pct": 2.217237949371338,
+      "group": "recent-history lags"
+    },
+    {
+      "feature": "roll_mean_168",
+      "mean_abs_shap": 249.815673828125,
+      "share_pct": 1.9625380039215088,
+      "group": "rolling statistics"
+    }
+  ],
+  "group_importance": {
+    "recent-history lags": 70.42476654052734,
+    "calendar flags": 12.117883682250977,
+    "annual seasonality": 6.502628803253174,
+    "rolling statistics": 4.516873359680176,
+    "day of week": 3.5565197467803955,
+    "daily cycle": 1.8489683866500854,
+    "hour of day": 0.6794564127922058,
+    "month": 0.35290321707725525
+  },
+  "report": [
+    "Model: XGBoost direct 24-step forecaster for Germany grid - next 24 h (hourly), explained on 2000 test observations.",
+    "Top features by mean |SHAP|: lag_168 (32.3 %), lag_336 (13.8 %), lag_24 (12.7 %), is_offday (9.5 %), dayofweek (3.6 %).",
+    "Feature groups: recent-history lags 70.4 %, calendar flags 12.1 %, annual seasonality 6.5 %, rolling statistics 4.5 %, day of week 3.6 %, daily cycle 1.8 %, hour of day 0.7 %, month 0.4 %.",
+    "Permutation importance agrees on the leading driver: lag_168 (+2.82e+03 MAE when shuffled).",
+    "SHAP values explain the model, not the physical system: they show what the model relies on, not causes."
+  ]
+}

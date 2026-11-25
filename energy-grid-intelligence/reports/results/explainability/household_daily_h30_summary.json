@@ -1,0 +1,81 @@
+{
+  "key": "household_daily_h30",
+  "n_explained": 216,
+  "top_features": [
+    {
+      "feature": "year_cos1",
+      "mean_abs_shap": 4.236546516418457,
+      "share_pct": 35.66835403442383,
+      "group": "annual seasonality"
+    },
+    {
+      "feature": "year_sin2",
+      "mean_abs_shap": 0.7321389317512512,
+      "share_pct": 6.164028167724609,
+      "group": "annual seasonality"
+    },
+    {
+      "feature": "lag_364",
+      "mean_abs_shap": 0.6914671659469604,
+      "share_pct": 5.821604251861572,
+      "group": "recent-history lags"
+    },
+    {
+      "feature": "roll_mean_28",
+      "mean_abs_shap": 0.6354137659072876,
+      "share_pct": 5.349678993225098,
+      "group": "rolling statistics"
+    },
+    {
+      "feature": "year_sin3",
+      "mean_abs_shap": 0.4905439615249634,
+      "share_pct": 4.129990100860596,
+      "group": "annual seasonality"
+    },
+    {
+      "feature": "roll_std_28",
+      "mean_abs_shap": 0.4830123782157898,
+      "share_pct": 4.066580772399902,
+      "group": "rolling statistics"
+    },
+    {
+      "feature": "dayofweek",
+      "mean_abs_shap": 0.46171119809150696,
+      "share_pct": 3.8872413635253906,
+      "group": "day of week"
+    },
+    {
+      "feature": "is_offday",
+      "mean_abs_shap": 0.4470565915107727,
+      "share_pct": 3.7638611793518066,
+      "group": "calendar flags"
+    },
+    {
+      "feature": "lag_35",
+      "mean_abs_shap": 0.43453115224838257,
+      "share_pct": 3.658407211303711,
+      "group": "recent-history lags"
+    },
+    {
+      "feature": "lag_31",
+      "mean_abs_shap": 0.4215390384197235,
+      "share_pct": 3.5490236282348633,
+      "group": "recent-history lags"
+    }
+  ],
+  "group_importance": {
+    "annual seasonality": 55.92372131347656,
+    "recent-history lags": 21.749774932861328,
+    "rolling statistics": 13.001725196838379,
+    "calendar flags": 4.934319972991943,
+    "day of week": 3.8872413635253906,
+    "month": 0.50321364402771
+  },
+  "report": [
+    "Model: XGBoost direct 30-step forecaster for Household - next 30 days (daily), explained on 216 test observations.",
+    "Top features by mean |SHAP|: year_cos1 (35.7 %), year_sin2 (6.2 %), lag_364 (5.8 %), roll_mean_28 (5.3 %), year_sin3 (4.1 %).",
+    "Feature groups: annual seasonality 55.9 %, recent-history lags 21.7 %, rolling statistics 13.0 %, calendar flags 4.9 %, day of week 3.9 %, month 0.5 %.",
+    "Permutation importance agrees on the leading driver: year_cos1 (+1.05 MAE when shuffled).",
+    "SHAP values explain the model, not the physical system: they show what the model relies on, not causes."
+  ]
+}

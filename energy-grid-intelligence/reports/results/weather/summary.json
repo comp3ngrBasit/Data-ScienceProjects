@@ -1,0 +1,101 @@
+{
+  "country": "DE",
+  "household": {
+    "status": "unavailable",
+    "source": "Open-Meteo archive (ERA5)",
+    "location": "Sceaux, FR",
+    "reason": "Open-Meteo archive API unreachable"
+  },
+  "weather_source": {
+    "source": "OPSD Weather Data package 2019-04-09 (Germany extract 2013-2016)",
+    "citation": "Open Power System Data (2019). Data Package Weather Data, version 2019-04-09. https://doi.org/10.25832/weather_data/2019-04-09",
+    "variables": [
+      "temperature",
+      "wind_speed",
+      "solar_radiation"
+    ],
+    "missing_variables": [
+      "humidity",
+      "precipitation",
+      "weather_code"
+    ],
+    "note": "Open-Meteo was unreachable; humidity and precipitation are not in the OPSD package.",
+    "n_days": 731,
+    "period": [
+      "2015-01-01",
+      "2016-12-31"
+    ]
+  },
+  "variables_available": [
+    "temperature",
+    "wind_speed",
+    "solar_radiation"
+  ],
+  "variables_missing": [
+    "humidity",
+    "precipitation"
+  ],
+  "train_period": [
+    "2015-01-01",
+    "2016-05-04"
+  ],
+  "test_period": [
+    "2016-05-05",
+    "2016-12-31"
+  ],
+  "hdd_base_c": 15.5,
+  "cdd_base_c": 22.0,
+  "hdd_effect_gwh_per_degree_day": {
+    "coef": 4.892237833119255,
+    "ci95": [
+      3.314209779095516,
+      6.470265887142994
+    ],
+    "p_value": 1.2296872333629245e-09
+  },
+  "cdd_days_in_sample": 31,
+  "weather_explained_variance": {
+    "calendar_only_r2": 0.7486401961657516,
+    "calendar_plus_weather_r2": 0.9107203727183772,
+    "residual_std_calendar_only_gwh": 76.19169836035847,
+    "residual_std_with_weather_gwh": 45.40837122502999
+  },
+  "best_model_test": "XGBoost",
+  "models": {
+    "MultipleLinear": {
+      "r2_train": 0.9191407722318254,
+      "adj_r2_train": 0.9171065778225632,
+      "calendar_only_r2_train": 0.7693195495475832,
+      "weather_incremental_r2": 0.14982122268424225
+    },
+    "Polynomial": {
+      "r2_train": 0.9213713789375072,
+      "degree": 3
+    },
+    "GAM": {
+      "pseudo_r2": 0.92463134429001,
+      "edf_total": 19.373211820105517,
+      "smooth_terms": [
+        "temperature",
+        "wind_speed",
+        "solar_radiation"
+      ],
+      "penalty_weight": 316.2277660168379,
+      "smooth_selection": "generalised cross-validation over a log grid",
+      "gcv": 1896.1648011653458
+    },
+    "BayesianRegression": {
+      "spec": "Bayesian regression of daily demand on weather + calendar (PyMC / ArviZ).\n\n    load_t ~ StudentT(nu, mu_t, sigma)\n    mu_t   = alpha + X_t @ beta            (X standardised on the training block)\n    alpha  ~ Normal(mean(y_train), 2 * sd(y_train))\n    beta   ~ Normal(0, sd(y_train))         weakly informative: a 1-sd change in a driver moves load by at most ~2 sd\n    sigma  ~ HalfNormal(sd(y_train))\n    nu     ~ Gamma(2, 0.1)                  robust to holiday outliers\n\nPosterior predictive draws on the held-out block give probabilistic demand forecasts (credible intervals).",
+      "draws": 1000,
+      "tune": 1000,
+      "chains": 2,
+      "max_r_hat": 1.0036700190428562,
+      "min_ess_bulk": 1106.9128500194315,
+      "divergences": 0,
+      "coverage_90": 89.21161825726142,
+      "coverage_50": 36.09958506224066,
+      "observed_train_mean_gwh": 1326.802981632653
+    }
+  },
+  "causality_note": "Associations only: weather co-varies with daylight, season and economic activity."
+}

@@ -1,0 +1,112 @@
+{
+  "household": {
+    "series": "household",
+    "max": {
+      "value": 6.560533046722412,
+      "timestamp": "2008-11-23 18:00:00"
+    },
+    "overall_peak_to_average": 6.031910467248766,
+    "mean_daily_par": 2.6836595281651605,
+    "mean_daily_load_factor": 0.3931965649143957,
+    "percentiles": {
+      "p50.0": 0.7977666556835175,
+      "p75.0": 1.5743666887283325,
+      "p90.0": 2.335189938545229,
+      "p95.0": 2.8546332836151094,
+      "p99.0": 3.9201586103439285,
+      "p99.9": 5.167299385070785
+    },
+    "peak_definition": "data-driven: 19:00-23:00 (4 h window with highest mean load)",
+    "peak_share_of_energy": 0.26420536636584846,
+    "peak_share_of_hours": 0.16666666666666666,
+    "peak_intensity_ratio": 1.7953743768211243,
+    "most_common_daily_peak_hour": 20,
+    "weekday_mean_daily_peak": 2.7268239270001504,
+    "weekend_mean_daily_peak": 3.178798775675813,
+    "seasonal_mean_daily_peak": {
+      "Autumn": 3.0558181861648985,
+      "Spring": 2.8959055933291498,
+      "Summer": 2.0361768088667938,
+      "Winter": 3.4792552604191544
+    },
+    "high_demand_threshold_p99": 3.9201586103439285,
+    "n_high_demand_events": 265,
+    "extreme_value": {
+      "threshold": 4.675413370132446,
+      "threshold_quantile": 0.95,
+      "n_exceedances": 72,
+      "n_clusters": 52,
+      "shape_xi": -0.4460821589240902,
+      "scale_sigma": 1.0051592430915306,
+      "ks_p": 0.5993822121550688,
+      "years_observed": 3.9425051334702257,
+      "return_levels": {
+        "1y": 6.215693291717398,
+        "2y": 6.405334115666919,
+        "5y": 6.580936742162558,
+        "10y": 6.673435049398624
+      },
+      "return_level_10y_ci95": [
+        6.483024453010664,
+        7.0749463789050315
+      ],
+      "observed_max": 6.560533046722412,
+      "caveat": "Daily peaks are seasonal and serially dependent; declustering reduces but does not remove dependence. Return levels assume a stationary climate/demand regime."
+    }
+  },
+  "grid": {
+    "series": "grid",
+    "max": {
+      "value": 77549.0,
+      "timestamp": "2017-12-13 17:00:00"
+    },
+    "overall_peak_to_average": 1.3974758327633496,
+    "mean_daily_par": 1.1624847123617401,
+    "mean_daily_load_factor": 0.8606405822971009,
+    "percentiles": {
+      "p50.0": 55092.0,
+      "p75.0": 64309.0,
+      "p90.0": 68862.0,
+      "p95.0": 70849.0,
+      "p99.0": 73619.0,
+      "p99.9": 75616.39999999997
+    },
+    "peak_definition": "08:00-20:00 Mon-Fri (EEX peak-load definition)",
+    "peak_share_of_energy": 0.41101472601793865,
+    "peak_share_of_hours": 0.3459455169540287,
+    "peak_intensity_ratio": 1.3193473996756135,
+    "most_common_daily_peak_hour": 11,
+    "weekday_mean_daily_peak": 68185.36508994004,
+    "weekend_mean_daily_peak": 55204.765,
+    "seasonal_mean_daily_peak": {
+      "Autumn": 65072.56172839506,
+      "Spring": 63077.09782608696,
+      "Summer": 62669.77173913043,
+      "Winter": 67380.73385518591
+    },
+    "high_demand_threshold_p99": 73619.0,
+    "n_high_demand_events": 179,
+    "extreme_value": {
+      "threshold": 73824.0,
+      "threshold_quantile": 0.95,
+      "n_exceedances": 105,
+      "n_clusters": 35,
+      "shape_xi": -0.5735156464532357,
+      "scale_sigma": 2244.204022188481,
+      "ks_p": 0.9979110646494288,
+      "years_observed": 5.752224503764545,
+      "return_levels": {
+        "1y": 76347.91990856288,
+        "2y": 76803.59107532792,
+        "5y": 77185.14344060486,
+        "10y": 77366.18626444569
+      },
+      "return_level_10y_ci95": [
+        76528.15132198134,
+        77555.51425357943
+      ],
+      "observed_max": 77549.0,
+      "caveat": "Daily peaks are seasonal and serially dependent; declustering reduces but does not remove dependence. Return levels assume a stationary climate/demand regime."
+    }
+  }
+}

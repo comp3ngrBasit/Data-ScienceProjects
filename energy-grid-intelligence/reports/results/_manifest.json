@@ -1,0 +1,170 @@
+{
+  "forecast": {
+    "status": "ok",
+    "fingerprint": "100dea59c8204426",
+    "seconds": 1366.0,
+    "finished": "2026-11-25T03:01:41.570524+00:00",
+    "output": {
+      "note": "full walk-forward run (background job)"
+    }
+  },
+  "data": {
+    "status": "ok",
+    "fingerprint": "raw",
+    "seconds": 0.2,
+    "finished": "2026-11-25T03:01:45.172639+00:00",
+    "output": {
+      "household": {
+        "cached": true
+      },
+      "grid": {
+        "cached": true
+      }
+    }
+  },
+  "eda": {
+    "status": "ok",
+    "fingerprint": "c8bbfac42d3ea207",
+    "seconds": 2.4,
+    "finished": "2026-11-25T03:01:47.597529+00:00",
+    "output": {
+      "consumption": true,
+      "timeseries": true
+    }
+  },
+  "forward": {
+    "status": "ok",
+    "fingerprint": "34e3593d8824a9f6",
+    "seconds": 75.1,
+    "finished": "2026-11-25T03:12:20.095185+00:00",
+    "output": {
+      "household_hourly_h24": "LSTM",
+      "grid_hourly_h24": "XGBoost"
+    }
+  },
+  "peak": {
+    "status": "ok",
+    "fingerprint": "3e463cd1869009f2",
+    "seconds": 9.5,
+    "finished": "2026-11-25T03:03:15.049659+00:00",
+    "output": {
+      "done": true
+    }
+  },
+  "segmentation": {
+    "status": "ok",
+    "fingerprint": "f89e5d03eacb410d",
+    "seconds": 3.3,
+    "finished": "2026-11-25T03:03:18.363499+00:00",
+    "output": {
+      "done": true
+    }
+  },
+  "anomaly": {
+    "status": "ok",
+    "fingerprint": "0b29d30a41eb84fd",
+    "seconds": 25.8,
+    "finished": "2026-11-25T03:03:44.209079+00:00",
+    "output": {
+      "n": 171
+    }
+  },
+  "renewable": {
+    "status": "ok",
+    "fingerprint": "ca609e08047cccb8",
+    "seconds": 1.6,
+    "finished": "2026-11-25T03:03:45.832349+00:00",
+    "output": {
+      "done": true
+    }
+  },
+  "weather": {
+    "status": "ok",
+    "fingerprint": "8ce600011b4edf7e",
+    "seconds": 23.0,
+    "finished": "2026-11-25T03:04:08.854258+00:00",
+    "output": {
+      "best": "XGBoost"
+    }
+  },
+  "statistics": {
+    "status": "ok",
+    "fingerprint": "980eaca763f1d873",
+    "seconds": 21.4,
+    "finished": "2026-11-25T03:04:30.254658+00:00",
+    "output": {
+      "n_tests": 7,
+      "correction": "Holm (family-wise error rate, alpha = 0.05)",
+      "n_significant": 6,
+      "method_note": "Statistical hypothesis testing with effect sizes, block-bootstrap CIs and Holm correction.\n\nDaily energy series are serially correlated, so classical tests overstate significance. Each comparison\ntherefore reports (a) the classical test, (b) an effect size, and (c) a 95 % CI for the difference in\nmeans from a *moving-block bootstrap over weeks*, which preserves within-week dependence. Holm's\nstep-down procedure controls the family-wise error rate across all tests."
+    }
+  },
+  "explain": {
+    "status": "ok",
+    "fingerprint": "8d06b5fe27035a68",
+    "seconds": 15.1,
+    "finished": "2026-11-25T03:04:45.321176+00:00",
+    "output": {
+      "keys": [
+        "household_hourly_h24",
+        "grid_hourly_h24",
+        "household_daily_h30"
+      ]
+    }
+  },
+  "kpis": {
+    "status": "ok",
+    "fingerprint": "a830c7813ac99a37",
+    "seconds": 0.0,
+    "finished": "2026-11-25T03:12:20.105812+00:00",
+    "output": {
+      "generated_at": "2026-11-25T03:12:20.096977+00:00",
+      "household_total_kwh": 37588.75787792355,
+      "household_avg_daily_kwh": 26.103304081891352,
+      "household_daily_cv": 0.3830729511138963,
+      "grid_total_twh": 2796.862069,
+      "grid_avg_daily_gwh": 1331.7752704761904,
+      "grid_daily_cv": 0.11849087390660255,
+      "household_max_hourly_kwh": 6.560533046722412,
+      "household_max_time": "2008-11-23 18:00:00",
+      "grid_max_load_mw": 77549.0,
+      "grid_max_time": "2017-12-13 17:00:00",
+      "vre_penetration_pct": 29.02801484201472,
+      "solar_share_of_vre_pct": 28.323585406087442,
+      "wind_share_of_vre_pct": 71.67641459391255,
+      "consensus_anomalies": 171,
+      "anomalies_by_severity": {
+        "low": 64,
+        "medium": 56,
+        "high": 35,
+        "critical": 16
+      },
+      "household_hourly_h24_best_model": "LSTM",
+      "household_hourly_h24_best_wape": 47.66232524132611,
+      "household_hourly_h24_best_mae": 0.4127398141815017,
+      "household_hourly_h24_skill_vs_naive_pct": 21.992017930508332,
+      "household_hourly_h24_pi_coverage": 93.75,
+      "household_hourly_h24_forward_total": 31.671955108642578,
+      "household_hourly_h24_forward_peak": 2.4995503425598145,
+      "household_hourly_h24_forward_from": "2010-11-25 23:00:00",
+      "grid_hourly_h24_best_model": "XGBoost",
+      "grid_hourly_h24_best_wape": 1.8986438814120197,
+      "grid_hourly_h24_best_mae": 1019.6516655815972,
+      "grid_hourly_h24_skill_vs_naive_pct": 49.355923137449345,
+      "grid_hourly_h24_pi_coverage": 90.625,
+      "grid_hourly_h24_forward_total": 1368309.5,
+      "grid_hourly_h24_forward_peak": 65845.9140625,
+      "grid_hourly_h24_forward_from": "2020-10-01 01:00:00"
+    }
+  },
+  "report": {
+    "status": "ok",
+    "fingerprint": "2fabe559728230a0",
+    "seconds": 0.9,
+    "finished": "2026-11-25T03:13:22.931150+00:00",
+    "output": {
+      "pdf": "/home/claude/energy-grid-intelligence/reports/energy_grid_intelligence_report.pdf",
+      "csv_zip": "/home/claude/energy-grid-intelligence/reports/energy_grid_intelligence_tables.zip"
+    }
+  }
+}

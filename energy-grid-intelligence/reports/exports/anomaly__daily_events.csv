@@ -1,0 +1,16 @@
+date,observed_kwh,expected_kwh,deviation_pct,robust_z,severity,method,type,evidence
+2007-09-29,38.27536717057228,21.95983335375786,74.2971658936676,4.884963465545694,medium,Daily robust z (28-day median),unexpected change in daily consumption,daily total z = 4.88 vs trailing 28-day median 22.0 kWh
+2007-10-02,36.64773327112198,22.425216667354107,63.421980776099,4.130393250578762,medium,Daily robust z (28-day median),unexpected change in daily consumption,daily total z = 4.13 vs trailing 28-day median 22.4 kWh
+2008-08-31,25.053102791309357,4.570416711270809,448.1579552588174,4.272655750428434,medium,Daily robust z (28-day median),unexpected change in daily consumption,daily total z = 4.27 vs trailing 28-day median 4.6 kWh
+2008-08-31,1.0926566128554829,0.02915835090669124,3647.319649016024,4.976165914237572,medium,Volatility robust z,abnormal consumption volatility,intra-day hourly std z = 4.98 (trailing 28-day median 0.03 kWh)
+2008-09-06,31.142900362610817,4.570416711270809,581.4017699045105,4.012782952196612,medium,Daily robust z (28-day median),unexpected change in daily consumption,daily total z = 4.01 vs trailing 28-day median 4.6 kWh
+2008-11-23,56.78597795963287,27.007683351635933,110.25860389537327,4.5958975607721015,medium,Daily robust z (28-day median),unexpected change in daily consumption,daily total z = 4.60 vs trailing 28-day median 27.0 kWh
+2008-11-23,1.7968818019077852,0.7049408736428973,154.89822892835033,4.655020555567924,medium,Volatility robust z,abnormal consumption volatility,intra-day hourly std z = 4.66 (trailing 28-day median 0.70 kWh)
+2008-11-24,53.54996657371521,27.463899940252304,94.9831112486323,4.0260495635863105,medium,Daily robust z (28-day median),unexpected change in daily consumption,daily total z = 4.03 vs trailing 28-day median 27.5 kWh
+2009-01-16,1.638428107696778,0.8571796650887131,91.14173777410015,4.255252588603407,medium,Volatility robust z,abnormal consumption volatility,intra-day hourly std z = 4.26 (trailing 28-day median 0.86 kWh)
+2009-01-17,55.29699945449829,29.889916628599167,85.002186997033,4.24107521723354,medium,Daily robust z (28-day median),unexpected change in daily consumption,daily total z = 4.24 vs trailing 28-day median 29.9 kWh
+2009-01-31,55.21419993042946,30.826983273029327,79.10996817757585,4.049355140371957,medium,Daily robust z (28-day median),unexpected change in daily consumption,daily total z = 4.05 vs trailing 28-day median 30.8 kWh
+2009-10-17,45.701333582401276,24.492300152778625,86.59469832283804,4.029760688973747,medium,Daily robust z (28-day median),unexpected change in daily consumption,daily total z = 4.03 vs trailing 28-day median 24.5 kWh
+2009-12-24,1.6881161689467683,0.7944267389190175,112.49488294462506,4.4262230194538486,medium,Volatility robust z,abnormal consumption volatility,intra-day hourly std z = 4.43 (trailing 28-day median 0.79 kWh)
+2010-10-18,1.3178466357641647,0.6508317510523298,102.4865310632646,4.0877834649102125,medium,Volatility robust z,abnormal consumption volatility,intra-day hourly std z = 4.09 (trailing 28-day median 0.65 kWh)
+2010-11-04,1.3896928553896652,0.7150069985277372,94.36073468527806,4.233460810509949,medium,Volatility robust z,abnormal consumption volatility,intra-day hourly std z = 4.23 (trailing 28-day median 0.72 kWh)

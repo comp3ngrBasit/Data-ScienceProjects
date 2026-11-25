@@ -1,0 +1,27 @@
+[
+  {
+    "key": "household_hourly_h24",
+    "label": "Household - next 24 h (hourly)",
+    "best_model": "LSTM"
+  },
+  {
+    "key": "household_hourly_h168",
+    "label": "Household - next 7 days (hourly)",
+    "best_model": "RandomForest"
+  },
+  {
+    "key": "household_daily_h30",
+    "label": "Household - next 30 days (daily)",
+    "best_model": "RandomForest"
+  },
+  {
+    "key": "grid_hourly_h24",
+    "label": "Germany grid - next 24 h (hourly)",
+    "best_model": "XGBoost"
+  },
+  {
+    "key": "grid_hourly_h168",
+    "label": "Germany grid - next 7 days (hourly)",
+    "best_model": "XGBoost"
+  }
+]

@@ -1,0 +1,473 @@
+{
+  "key": "grid_hourly_h24",
+  "label": "Germany grid - next 24 h (hourly)",
+  "unit": "MW",
+  "horizon": 24,
+  "train_end": "2019-04-25 00:00:00",
+  "val_end": "2019-11-21 00:00:00",
+  "test_end": "2020-10-01 01:00:00",
+  "origins": [
+    "2019-11-21 23:00:00",
+    "2019-12-18 23:00:00",
+    "2020-01-16 23:00:00",
+    "2020-02-13 23:00:00",
+    "2020-03-13 23:00:00",
+    "2020-04-10 23:00:00",
+    "2020-05-09 23:00:00",
+    "2020-06-06 23:00:00",
+    "2020-07-05 23:00:00",
+    "2020-08-02 23:00:00",
+    "2020-08-31 23:00:00",
+    "2020-09-29 23:00:00"
+  ],
+  "best_model": "XGBoost",
+  "selection_metric": "pooled WAPE",
+  "interval_level": 0.9,
+  "model_info": {
+    "SeasonalNaive": {
+      "params": {},
+      "search": null,
+      "history": null,
+      "seconds": 0.1,
+      "status": "ok"
+    },
+    "LinearRegression": {
+      "params": {},
+      "search": [
+        {
+          "params": {},
+          "val_rmse": 2381.7943286611594
+        }
+      ],
+      "history": null,
+      "seconds": 0.2,
+      "status": "ok",
+      "artifact": "models/forecasting/grid_hourly_h24_LinearRegression.joblib"
+    },
+    "RandomForest": {
+      "params": {
+        "n_estimators": 150,
+        "max_depth": 16,
+        "min_samples_leaf": 3,
+        "max_features": 0.5
+      },
+      "search": [
+        {
+          "params": {
+            "n_estimators": 150,
+            "max_depth": 10,
+            "min_samples_leaf": 3,
+            "max_features": 0.5
+          },
+          "val_rmse": 1597.2562896388888
+        },
+        {
+          "params": {
+            "n_estimators": 150,
+            "max_depth": 10,
+            "min_samples_leaf": 10,
+            "max_features": 0.5
+          },
+          "val_rmse": 1601.8875120863115
+        },
+        {
+          "params": {
+            "n_estimators": 150,
+            "max_depth": 16,
+            "min_samples_leaf": 3,
+            "max_features": 0.5
+          },
+          "val_rmse": 1469.4126994525054
+        },
+        {
+          "params": {
+            "n_estimators": 150,
+            "max_depth": 16,
+            "min_samples_leaf": 10,
+            "max_features": 0.5
+          },
+          "val_rmse": 1492.1302643988859
+        }
+      ],
+      "history": null,
+      "seconds": 139.3,
+      "status": "ok",
+      "artifact": "models/forecasting/grid_hourly_h24_RandomForest.joblib"
+    },
+    "XGBoost": {
+      "params": {
+        "n_estimators": 300,
+        "max_depth": 8,
+        "learning_rate": 0.05,
+        "subsample": 0.8,
+        "colsample_bytree": 0.8
+      },
+      "search": [
+        {
+          "params": {
+            "n_estimators": 300,
+            "max_depth": 4,
+            "learning_rate": 0.05,
+            "subsample": 0.8,
+            "colsample_bytree": 0.8
+          },
+          "val_rmse": 1516.3271815993735
+        },
+        {
+          "params": {
+            "n_estimators": 500,
+            "max_depth": 6,
+            "learning_rate": 0.03,
+            "subsample": 0.8,
+            "colsample_bytree": 0.8
+          },
+          "val_rmse": 1444.9823894935814
+        },
+        {
+          "params": {
+            "n_estimators": 300,
+            "max_depth": 8,
+            "learning_rate": 0.05,
+            "subsample": 0.8,
+            "colsample_bytree": 0.8
+          },
+          "val_rmse": 1416.3278706299639
+        },
+        {
+          "params": {
+            "n_estimators": 800,
+            "max_depth": 4,
+            "learning_rate": 0.02,
+            "subsample": 0.8,
+            "colsample_bytree": 0.8
+          },
+          "val_rmse": 1537.2350491735517
+        }
+      ],
+      "history": null,
+      "seconds": 56.2,
+      "status": "ok",
+      "artifact": "models/forecasting/grid_hourly_h24_XGBoost.joblib"
+    },
+    "SARIMA": {
+      "params": {
+        "order": [
+          2,
+          0,
+          1
+        ],
+        "seasonal_order": [
+          1,
+          1,
+          1,
+          24
+        ],
+        "aic": 15929.241177143223
+      },
+      "search": [
+        {
+          "order": [
+            1,
+            0,
+            1
+          ],
+          "seasonal_order": [
+            1,
+            1,
+            1,
+            24
+          ],
+          "aic": 16067.18128857469
+        },
+        {
+          "order": [
+            1,
+            0,
+            1
+          ],
+          "seasonal_order": [
+            0,
+            1,
+            1,
+            24
+          ],
+          "aic": 16096.92974092692
+        },
+        {
+          "order": [
+            2,
+            0,
+            1
+          ],
+          "seasonal_order": [
+            1,
+            1,
+            1,
+            24
+          ],
+          "aic": 15929.241177143223
+        },
+        {
+          "order": [
+            2,
+            0,
+            1
+          ],
+          "seasonal_order": [
+            0,
+            1,
+            1,
+            24
+          ],
+          "aic": 16036.93901766849
+        },
+        {
+          "order": [
+            1,
+            0,
+            2
+          ],
+          "seasonal_order": [
+            1,
+            1,
+            1,
+            24
+          ],
+          "aic": 15942.317418841902
+        },
+        {
+          "order": [
+            1,
+            0,
+            2
+          ],
+          "seasonal_order": [
+            0,
+            1,
+            1,
+            24
+          ],
+          "aic": 15984.543265192602
+        }
+      ],
+      "history": null,
+      "seconds": 24.7,
+      "status": "ok"
+    },
+    "SARIMAX": {
+      "params": {
+        "order": [
+          2,
+          0,
+          1
+        ],
+        "seasonal_order": [
+          1,
+          1,
+          1,
+          24
+        ],
+        "aic": 16338.496532567606
+      },
+      "search": [
+        {
+          "order": [
+            1,
+            0,
+            1
+          ],
+          "seasonal_order": [
+            1,
+            1,
+            1,
+            24
+          ],
+          "aic": 16446.832724151576
+        },
+        {
+          "order": [
+            1,
+            0,
+            1
+          ],
+          "seasonal_order": [
+            0,
+            1,
+            1,
+            24
+          ],
+          "aic": 16481.230361905495
+        },
+        {
+          "order": [
+            2,
+            0,
+            1
+          ],
+          "seasonal_order": [
+            1,
+            1,
+            1,
+            24
+          ],
+          "aic": 16338.496532567606
+        },
+        {
+          "order": [
+            2,
+            0,
+            1
+          ],
+          "seasonal_order": [
+            0,
+            1,
+            1,
+            24
+          ],
+          "aic": 16431.3668964049
+        },
+        {
+          "order": [
+            1,
+            0,
+            2
+          ],
+          "seasonal_order": [
+            1,
+            1,
+            1,
+            24
+          ],
+          "aic": 16407.51460304796
+        },
+        {
+          "order": [
+            1,
+            0,
+            2
+          ],
+          "seasonal_order": [
+            0,
+            1,
+            1,
+            24
+          ],
+          "aic": 16472.5125638165
+        }
+      ],
+      "history": null,
+      "seconds": 39.5,
+      "status": "ok"
+    },
+    "Prophet": {
+      "params": {
+        "changepoint_prior_scale": 0.01,
+        "window": 17520
+      },
+      "search": [
+        {
+          "changepoint_prior_scale": 0.01,
+          "val_rmse": 1670.877307830704
+        },
+        {
+          "changepoint_prior_scale": 0.1,
+          "val_rmse": 2008.621849162931
+        }
+      ],
+      "history": null,
+      "seconds": 43.5,
+      "status": "ok"
+    },
+    "LSTM": {
+      "params": {
+        "lookback": 168,
+        "hidden": 64,
+        "layers": 2,
+        "epochs_run": 12,
+        "best_val_mse": 0.03869229182600975,
+        "train_samples": 12537
+      },
+      "search": null,
+      "history": [
+        {
+          "epoch": 1,
+          "train_mse": 0.550579281275263,
+          "val_mse": 0.14684216678142548
+        },
+        {
+          "epoch": 2,
+          "train_mse": 0.10736124806270708,
+          "val_mse": 0.06858986616134644
+        },
+        {
+          "epoch": 3,
+          "train_mse": 0.06355669166064627,
+          "val_mse": 0.054562974721193314
+        },
+        {
+          "epoch": 4,
+          "train_mse": 0.05397491952865101,
+          "val_mse": 0.04632483422756195
+        },
+        {
+          "epoch": 5,
+          "train_mse": 0.05018386504744869,
+          "val_mse": 0.045439478009939194
+        },
+        {
+          "epoch": 6,
+          "train_mse": 0.047179774927296136,
+          "val_mse": 0.04316222667694092
+        },
+        {
+          "epoch": 7,
+          "train_mse": 0.04411555352363231,
+          "val_mse": 0.04452759772539139
+        },
+        {
+          "epoch": 8,
+          "train_mse": 0.043652172535336965,
+          "val_mse": 0.04237094521522522
+        },
+        {
+          "epoch": 9,
+          "train_mse": 0.04089891454586004,
+          "val_mse": 0.04299846664071083
+        },
+        {
+          "epoch": 10,
+          "train_mse": 0.040212045150388606,
+          "val_mse": 0.03869229182600975
+        },
+        {
+          "epoch": 11,
+          "train_mse": 0.03848943850810737,
+          "val_mse": 0.04204640910029411
+        },
+        {
+          "epoch": 12,
+          "train_mse": 0.039450307871352695,
+          "val_mse": 0.040389396250247955
+        }
+      ],
+      "seconds": 172.6,
+      "status": "ok"
+    }
+  },
+  "residual_diagnostics_best": {
+    "mean": -417.4967990451389,
+    "std": 1224.069726621144,
+    "skew": -0.529281686834819,
+    "kurtosis": -0.22895946125730804,
+    "ljung_box_stat": 713.9564122089683,
+    "ljung_box_p": 2.869400897937628e-135,
+    "durbin_watson": 0.31259449318750165,
+    "jarque_bera_p": 0.0008779919737862194,
+    "interpretation": "residuals show significant autocorrelation (structure left unmodelled)"
+  },
+  "drift": {
+    "psi_target_test_vs_train": 0.14375998331335257,
+    "psi_interpretation": "moderate shift",
+    "best_model_wape_trend_per_fold": 0.009133134570841472
+  }
+}

@@ -1,0 +1,13 @@
+[project]
+name = "energy-grid-intelligence"
+version = "1.0.0"
+description = "Energy consumption & grid intelligence analytics platform"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+filterwarnings = ["ignore::DeprecationWarning", "ignore::FutureWarning", "ignore::UserWarning"]
+
+[tool.ruff]
+line-length = 140
+target-version = "py311"

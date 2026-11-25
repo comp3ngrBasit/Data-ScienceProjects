@@ -1,0 +1,6 @@
+{
+  "n_tests": 7,
+  "correction": "Holm (family-wise error rate, alpha = 0.05)",
+  "n_significant": 6,
+  "method_note": "Statistical hypothesis testing with effect sizes, block-bootstrap CIs and Holm correction.\n\nDaily energy series are serially correlated, so classical tests overstate significance. Each comparison\ntherefore reports (a) the classical test, (b) an effect size, and (c) a 95 % CI for the difference in\nmeans from a *moving-block bootstrap over weeks*, which preserves within-week dependence. Holm's\nstep-down procedure controls the family-wise error rate across all tests."
+}
